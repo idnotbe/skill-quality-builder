@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "suite_id": "skill-quality-builder-trigger-v1",
+  "conditions": [
+    "candidate"
+  ],
+  "repetitions": 1,
+  "case_status": "not_run",
+  "note": "Public sample split only. No actual host or model observations are provided. Run natural prompts without explicitly invoking the builder; observe host selection/read events. Cases mentioning attachment require the evaluator to supply a suitable harmless fixture.",
+  "cases": [
+    {
+      "id": "positive-01",
+      "kind": "trigger",
+      "prompt": "Create a reusable agent skill that extracts only confirmed decisions, owners, and due dates from meeting notes.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "positive-02",
+      "kind": "trigger",
+      "prompt": "Improve this SKILL.md bundle. Preserve its output schema and permissions, but fix missed references.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "positive-03",
+      "kind": "trigger",
+      "prompt": "Audit the attached skill without modifying it. Review its trigger conditions and its root and reference structure.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "positive-04",
+      "kind": "trigger",
+      "prompt": "Our skill triggers on ordinary emails. Narrow its discovery description and propose near-miss tests.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "positive-05",
+      "kind": "trigger",
+      "prompt": "Turn my repeated competitor-research procedure into a reusable Codex skill file.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "positive-06",
+      "kind": "trigger",
+      "prompt": "This skill reads every reference from its root instructions. Fix it by applying progressive disclosure.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "positive-07",
+      "kind": "trigger",
+      "prompt": "Turn this successful workflow and its failure examples into an Agent Skill bundle, with checks.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "positive-08",
+      "kind": "trigger",
+      "prompt": "Make the existing skill shorter without changing its approval conditions or CSV output format.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "positive-09",
+      "kind": "trigger",
+      "prompt": "I need a reusable SKILL.md for converting a client brief into a structured research plan.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "heldout"
+    },
+    {
+      "id": "positive-10",
+      "kind": "trigger",
+      "prompt": "Improve only this agent skill's description and preserve every other file unchanged.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "heldout"
+    },
+    {
+      "id": "positive-11",
+      "kind": "trigger",
+      "prompt": "Compare the original and revised agent skill against my cases, and give a safe candidate bundle.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "heldout"
+    },
+    {
+      "id": "positive-12",
+      "kind": "trigger",
+      "prompt": "Implement our team's skill-authoring guidance as a real skill package. Read reference files only when needed.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "heldout"
+    },
+    {
+      "id": "near-negative-01",
+      "kind": "trigger",
+      "prompt": "Only explain what progressive disclosure means in Agent Skills. Do not create files.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "near-negative-02",
+      "kind": "trigger",
+      "prompt": "Use my existing competitor-research skill to write this week’s actual competitor brief.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "near-negative-03",
+      "kind": "trigger",
+      "prompt": "Extract the decisions from the meeting notes below. I do not need a reusable skill.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "near-negative-04",
+      "kind": "trigger",
+      "prompt": "Improve this one-off email prompt; do not create an agent skill or reusable package.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "near-negative-05",
+      "kind": "trigger",
+      "prompt": "What is the difference between SKILL.md and AGENTS.md?",
+      "should_trigger": false,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "near-negative-06",
+      "kind": "trigger",
+      "prompt": "I attached a file named SKILL.md. Translate only its contents into French without changing its design or behavior.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "near-negative-07",
+      "kind": "trigger",
+      "prompt": "Fix a Python ImportError in this web service. It does not use agent skills.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "near-negative-08",
+      "kind": "trigger",
+      "prompt": "Write only a presentation outline that teaches teammates the principles of creating good skills.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "near-negative-09",
+      "kind": "trigger",
+      "prompt": "Schedule a meeting tomorrow to discuss our agent skills project.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "heldout"
+    },
+    {
+      "id": "near-negative-10",
+      "kind": "trigger",
+      "prompt": "Install this skill folder in my home directory without modifying or auditing the skill itself.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "heldout"
+    },
+    {
+      "id": "near-negative-11",
+      "kind": "trigger",
+      "prompt": "Run the action-extraction skill on the attached transcript; do not redesign the skill.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "heldout"
+    },
+    {
+      "id": "near-negative-12",
+      "kind": "trigger",
+      "prompt": "Find public articles about agent skill evaluation and return a reading list, not a new skill.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "heldout"
+    }
+  ]
+}

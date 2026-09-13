@@ -1,0 +1,8 @@
+temp/
+skill-authoring-kit.zip
+skill-quality-builder.zip
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/

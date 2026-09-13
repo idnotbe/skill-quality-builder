@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "suite_id": "skill-quality-builder-trigger-v1",
+  "metadata": {
+    "model": "",
+    "host": "",
+    "skill_version": "",
+    "run_context": "",
+    "evidence_kind": ""
+  },
+  "observations": []
+}

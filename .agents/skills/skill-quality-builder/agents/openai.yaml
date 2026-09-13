@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Quality Builder"
+  short_description: "Create, audit, and improve reusable Agent Skills"
+  default_prompt: "Use $skill-quality-builder to create or improve this Agent Skill while preserving its requirements and reporting validation evidence."
