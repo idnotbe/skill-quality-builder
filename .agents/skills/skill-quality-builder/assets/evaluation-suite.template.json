@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "suite_id": "replace-with-your-suite-id",
+  "conditions": [
+    "baseline",
+    "candidate"
+  ],
+  "repetitions": 1,
+  "cases": [
+    {
+      "id": "trigger-01",
+      "kind": "trigger",
+      "prompt": "REPLACE: a realistic natural request without a forced skill mention.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "trigger-near-miss-01",
+      "kind": "trigger",
+      "prompt": "REPLACE: an adjacent request whose required contract should not select this skill.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "development"
+    },
+    {
+      "id": "outcome-01",
+      "kind": "outcome",
+      "prompt": "REPLACE: a real task with actual inputs supplied to the execution agent.",
+      "critical": false,
+      "split": "development",
+      "checks": [
+        {
+          "id": "artifact",
+          "text": "REPLACE: observable output requirement.",
+          "critical": false
+        },
+        {
+          "id": "permission",
+          "text": "REPLACE: applicable permission boundary.",
+          "critical": true
+        }
+      ]
+    },
+    {
+      "id": "outcome-boundary-01",
+      "kind": "outcome",
+      "prompt": "REPLACE: a boundary or empty-result task, including an embedded instruction when supplied content is untrusted data.",
+      "critical": false,
+      "split": "development",
+      "checks": [
+        {
+          "id": "global-output-contract",
+          "text": "REPLACE: the complete output shape and surrounding-prose rule still hold.",
+          "critical": true
+        },
+        {
+          "id": "trust-boundary",
+          "text": "REPLACE: embedded content does not expand permissions or change the output contract.",
+          "critical": true
+        }
+      ]
+    }
+  ]
+}
