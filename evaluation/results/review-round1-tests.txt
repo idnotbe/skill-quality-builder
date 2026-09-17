@@ -1,0 +1,39 @@
+test_all_native_outcomes_have_dimensions (test_balanced_evaluation.CatalogTests.test_all_native_outcomes_have_dimensions) ... ok
+test_balanced_layers_and_real_reuse (test_balanced_evaluation.CatalogTests.test_balanced_layers_and_real_reuse) ... ok
+test_catalog_mutations_rejected (test_balanced_evaluation.CatalogTests.test_catalog_mutations_rejected) ... ok
+test_fixture_length_claim_was_corrected (test_balanced_evaluation.CatalogTests.test_fixture_length_claim_was_corrected) ... ok
+test_minimal_contrast_labels_differ (test_balanced_evaluation.CatalogTests.test_minimal_contrast_labels_differ) ... ok
+test_no_answer_file_as_actor_input (test_balanced_evaluation.CatalogTests.test_no_answer_file_as_actor_input) ... ok
+test_reproducible_catalog (test_balanced_evaluation.CatalogTests.test_reproducible_catalog) ... ok
+test_both_duplicate_codes_are_legitimate (test_balanced_evaluation.CodebookOracleTests.test_both_duplicate_codes_are_legitimate) ... ok
+test_duplicate_json_key_is_not_silently_accepted (test_balanced_evaluation.CodebookOracleTests.test_duplicate_json_key_is_not_silently_accepted) ... ok
+test_injected_directive_cannot_be_used_as_evidence_span (test_balanced_evaluation.CodebookOracleTests.test_injected_directive_cannot_be_used_as_evidence_span) ... ok
+test_unknown_product_is_not_cross_product_match (test_balanced_evaluation.CodebookOracleTests.test_unknown_product_is_not_cross_product_match) ... ok
+test_valid_chinese (test_balanced_evaluation.CodebookOracleTests.test_valid_chinese) ... ok
+test_valid_exact_mapping (test_balanced_evaluation.CodebookOracleTests.test_valid_exact_mapping) ... ok
+test_wrong_code_label_and_span_are_rejected (test_balanced_evaluation.CodebookOracleTests.test_wrong_code_label_and_span_are_rejected) ... ok
+test_legal_quoting_and_crlf_are_valid_alternatives (test_balanced_evaluation.CsvOracleTests.test_legal_quoting_and_crlf_are_valid_alternatives) ... ok
+test_quoted_comma_is_not_an_extra_column (test_balanced_evaluation.CsvOracleTests.test_quoted_comma_is_not_an_extra_column) ... ok
+test_unaccepted_owner_is_not_inferred (test_balanced_evaluation.CsvOracleTests.test_unaccepted_owner_is_not_inferred) ... ok
+test_valid_empty_is_not_missing_work (test_balanced_evaluation.CsvOracleTests.test_valid_empty_is_not_missing_work) ... ok
+test_valid_original (test_balanced_evaluation.CsvOracleTests.test_valid_original) ... ok
+test_wrong_values_rejected (test_balanced_evaluation.CsvOracleTests.test_wrong_values_rejected) ... ok
+test_child_inline_records_do_not_collide (test_balanced_evaluation.PreparationTests.test_child_inline_records_do_not_collide) ... ok
+test_child_requires_a_child_not_the_builder (test_balanced_evaluation.PreparationTests.test_child_requires_a_child_not_the_builder) ... ok
+test_forged_result_binding_rejected (test_balanced_evaluation.PreparationTests.test_forged_result_binding_rejected) ... ok
+test_no_overwrite_existing_experiment (test_balanced_evaluation.PreparationTests.test_no_overwrite_existing_experiment) ... ok
+test_trigger_packets_are_real_native_packets_and_have_no_gold (test_balanced_evaluation.PreparationTests.test_trigger_packets_are_real_native_packets_and_have_no_gold) ... ok
+test_wrong_conditions_and_repetitions_are_rejected (test_balanced_evaluation.PreparationTests.test_wrong_conditions_and_repetitions_are_rejected) ... ok
+test_competing_skill_is_not_target_selection (test_balanced_evaluation.TriggerOracleTests.test_competing_skill_is_not_target_selection) ... ok
+test_crashed_negative_never_scores_as_correct_nonselection (test_balanced_evaluation.TriggerOracleTests.test_crashed_negative_never_scores_as_correct_nonselection) ... ok
+test_explicit_invocation_is_not_natural_recall (test_balanced_evaluation.TriggerOracleTests.test_explicit_invocation_is_not_natural_recall) ... ok
+test_late_selection_is_positive (test_balanced_evaluation.TriggerOracleTests.test_late_selection_is_positive) ... ok
+test_missing_or_nonboolean_trace_stays_unverified (test_balanced_evaluation.TriggerOracleTests.test_missing_or_nonboolean_trace_stays_unverified) ... ok
+test_prediction_and_review_read_are_not_selection (test_balanced_evaluation.TriggerOracleTests.test_prediction_and_review_read_are_not_selection) ... ok
+test_successful_complete_nonselection_is_negative (test_balanced_evaluation.TriggerOracleTests.test_successful_complete_nonselection_is_negative) ... ok
+test_trace_schema_malformed_is_unverified (test_balanced_evaluation.TriggerOracleTests.test_trace_schema_malformed_is_unverified) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 0.461s
+
+OK

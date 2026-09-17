@@ -1,3 +1,6 @@
 # Evaluation manifests hash exact fixture bytes, not normalized text.
 # Keep fixed inputs identical even when a checkout uses core.autocrlf=true.
 /.agents/skills/skill-quality-builder/evals/fixtures/** text eol=lf
+# Balanced catalog pins imported source JSON bytes and external fixture bytes.
+/.agents/skills/skill-quality-builder/evals/*.json text eol=lf
+/evaluation/** text eol=lf

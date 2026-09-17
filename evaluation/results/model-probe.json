@@ -1,0 +1,16 @@
+{
+  "endpoint": "https://models.github.ai/inference/chat/completions",
+  "request": {
+    "model": "openai/gpt-4.1-mini",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Return exactly the word READY."
+      }
+    ],
+    "max_tokens": 16,
+    "temperature": 0
+  },
+  "status": 410,
+  "error": "{\"error\":{\"code\":\"github_models_retirement_brownout\",\"message\":\"GitHub Models is temporarily unavailable as part of a scheduled retirement brownout.\"}}\n"
+}

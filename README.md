@@ -25,6 +25,19 @@ The second command is a dry run. Actual execution additionally requires `--execu
 
 After actual grading, the existing summarizer separates completion, correctness, judgment, usefulness, safety and format, capability versus regression, and matched baseline improvements/regressions. New experiments bind executor effort/host/settings separately from builder identity; compare different executor configurations in separate cohorts. Missing checks are never counted as wins. The added extraction/analysis/action transfer, grader-calibration and model-choice examples are public development cases with empty observations, not evidence of improved model performance.
 
+## Balanced evaluation package
+
+The repository-level [evaluation package](evaluation/README.md) contains 108 public
+scenarios spanning natural triggering, builder behavior, downstream generated
+skills and grader calibration. It adapts 67 existing cases and external SkillsBench
+codebook data, and provides pinned inputs, actor/judge separation, calibrated output
+checks and adversarial regression tests. It is deliberately outside the installed
+skill bundle.
+
+[Recorded results](evaluation/RESULTS.md) distinguish deterministic checks and an
+eight-case nonblind current-session artifact pilot from the still-unverified fresh
+host/child comparisons. No 108-case model pass rate or improvement is claimed.
+
 ## Convenient installation (floating versions)
 
 Requires Node.js 22.20 or later; `npx` is included with npm. Run in the project where you want to use the skill:
