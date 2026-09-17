@@ -5,6 +5,9 @@ import argparse
 import json
 import sys
 from pathlib import Path
+if __name__ == "__main__":
+    sys.dont_write_bytecode = True
+
 from skill_lib import init_skill
 
 

@@ -10,6 +10,7 @@ import json
 import os
 import re
 import stat
+import unicodedata
 from pathlib import Path
 from typing import Any
 from urllib.parse import unquote, urlsplit
@@ -158,6 +159,63 @@ def likely_secret(path: Path) -> bool:
     )
 
 
+def strip_scalar_comment(raw: str) -> str:
+    """Remove YAML comments, without treating quoted hashes as comments.
+
+    Only a quote at the start introduces a quoted scalar. Apostrophes inside
+    plain text (for example John's report) are ordinary characters.
+    """
+    if not raw.startswith(("'", '"')):
+        match = re.search(r"(?:^|[ \t])#", raw)
+        return raw[:match.start()].rstrip() if match else raw
+    quote = raw[0]
+    i = 1
+    while i < len(raw):
+        if quote == '"' and raw[i] == "\\":
+            i += 2
+            continue
+        if raw[i] == quote:
+            if quote == "'" and i + 1 < len(raw) and raw[i + 1] == "'":
+                i += 2
+                continue
+            tail = raw[i + 1:]
+            if not tail.strip() or re.fullmatch(r"[ \t]+#.*", tail):
+                return raw[:i + 1]
+            return raw  # Unsupported trailing content must still fail parsing.
+        i += 1
+    return raw  # Unterminated quotes are handled by the scalar parser.
+
+
+def portable_path_issues(paths: list[str]) -> list[dict[str, Any]]:
+    """Conservative Windows/macOS portable-name checks, independent of host OS.
+
+    This does not guarantee extraction on every filesystem (for example legacy
+    Windows total-path limits). Check every prefix, including directory names.
+    """
+    problems: list[dict[str, Any]] = []
+    seen: dict[str, str] = {}
+    checked: set[str] = set()
+    reserved = {"CON", "PRN", "AUX", "NUL", "CONIN$", "CONOUT$"}
+    reserved.update(prefix + digit for prefix in ("COM", "LPT") for digit in "123456789¹²³")
+    for path in sorted(paths):
+        parts = path.split("/")
+        for index, part in enumerate(parts):
+            prefix = "/".join(parts[:index + 1])
+            if prefix in checked:
+                continue
+            checked.add(prefix)
+            key = unicodedata.normalize("NFC", prefix).casefold()
+            if key in seen and seen[key] != prefix:
+                problems.append(issue("error", "portable_collision", f"Portable-name collision with {seen[key]}.", prefix))
+            else:
+                seen[key] = prefix
+            stem = part.split(".", 1)[0].rstrip(" ").upper()
+            if (not part or part in {".", ".."} or part.endswith((" ", "."))
+                    or stem in reserved or any(ord(c) < 32 or c in '<>:"\\|?*' for c in part)):
+                problems.append(issue("error", "portable_name", "Name is not supported by the portable archive profile.", prefix))
+    return problems
+
+
 def parse_frontmatter(text: str) -> tuple[dict[str, str | None], str, list[dict[str, Any]]]:
     """Parse ordinary string scalars only. None means present but not interpreted.
 
@@ -184,7 +242,7 @@ def parse_frontmatter(text: str) -> tuple[dict[str, str | None], str, list[dict[
             problems.append(issue("warning", "yaml_unsupported", "Syntax outside the scalar profile; validate with the host's YAML parser.", "SKILL.md", i + 1))
             i += 1
             continue
-        key, raw = match.group(1), (match.group(2) or "").strip()
+        key, raw = match.group(1), strip_scalar_comment((match.group(2) or "").strip())
         if key in fields:
             problems.append(issue("error", "duplicate_field", f"Duplicate frontmatter field: {key}", "SKILL.md", i + 1))
         if key not in CORE_FIELDS:
@@ -222,10 +280,10 @@ def parse_frontmatter(text: str) -> tuple[dict[str, str | None], str, list[dict[
             while j < end and (not lines[j].strip() or lines[j].startswith(" ")):
                 j += 1
             i = j - 1
-        elif raw and (raw[0] in "[{&*!'" or ": " in raw or raw.lower() in {"null", "true", "false", "~"} or re.fullmatch(r"[-+]?\d+(?:\.\d+)?", raw)):
+        elif raw and (raw[0] in "[{&*!'" or ": " in raw or raw.lower() in {"null", "true", "false", "~"} or re.fullmatch(r"[-+]?(?:0[xX][0-9a-fA-F]+|0[oO][0-7]+|(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?|\.(?:inf|Inf|INF|nan|NaN|NAN))", raw)):
             problems.append(issue("warning", "yaml_unsupported", f"Potential non-string or advanced YAML in {key}; host validation required.", "SKILL.md", i + 1))
         else:
-            value = re.split(r"\s+#", raw, maxsplit=1)[0].rstrip()
+            value = raw
         fields[key] = value
         i += 1
     return fields, "\n".join(lines[end + 1:]), problems
@@ -253,10 +311,15 @@ def markdown_links(text: str) -> list[tuple[int, str]]:
     return result
 
 
-def lint_skill(root: Path) -> dict[str, Any]:
+def lint_skill(root: Path, *, portability: str = "portable", reference_exemptions: tuple[str, ...] = ()) -> dict[str, Any]:
+    if portability not in {"portable", "native"}:
+        raise SkillError("Portability must be portable or native.")
     root = Path(os.path.abspath(root.expanduser()))
     files, problems, excluded = inventory(root)
     stats: dict[str, Any] = {"file_count": len(files), "limits": {"max_files": MAX_FILES, "max_file_bytes": MAX_FILE_BYTES, "max_total_bytes": MAX_TOTAL_BYTES}}
+    stats["portability"] = portability
+    if portability == "portable":
+        problems.extend(portable_path_issues([root.name] + [(Path(root.name) / p.relative_to(root)).as_posix() for p in files]))
     if not root.is_dir() or root.is_symlink():
         return _report(root, stats, problems, excluded)
     skill = next((path for path in files if path.relative_to(root).as_posix() == "SKILL.md"), None)
@@ -300,9 +363,8 @@ def lint_skill(root: Path) -> dict[str, Any]:
         problems.append(issue("warning", "empty_body", "No execution instructions are present.", "SKILL.md"))
     if re.search(r"\b(?:TODO|TBD)\b|\[DRAFT\]|<FILL", body):
         problems.append(issue("warning", "scaffold", "Unfinished scaffolding detected; complete before release.", "SKILL.md"))
-    if not markdown_links(body) and any(p.relative_to(root).parts[0] == "references" for p in files):
-        problems.append(issue("warning", "undiscoverable_references", "References exist but no ordinary inline links occur in SKILL.md.", "SKILL.md"))
     available = {p.resolve() for p in files}
+    graph: dict[Path, set[Path]] = {p: set() for p in available}
     for p in files:
         rel = p.relative_to(root).as_posix()
         if likely_secret(p):
@@ -339,6 +401,25 @@ def lint_skill(root: Path) -> dict[str, Any]:
                 problems.append(issue("error", "link_unshipped_directory", f"Directory has no included files and will not exist in the archive: {link}", rel, number))
             elif target.is_file() and target not in available:
                 problems.append(issue("error", "link_excluded", f"Reference points to an excluded or rejected file: {link}", rel, number))
+            elif target in available:
+                graph[p.resolve()].add(target)
+    reached: set[Path] = set()
+    pending = [skill.resolve()]
+    while pending:
+        current = pending.pop()
+        if current in reached:
+            continue
+        reached.add(current)
+        pending.extend(graph.get(current, set()) - reached)
+    references = {p.relative_to(root).as_posix(): p.resolve() for p in files
+                  if p.relative_to(root).parts[0] == "references" and p.suffix.lower() == ".md"}
+    exemptions = set(reference_exemptions)
+    for exemption in sorted(exemptions - references.keys()):
+        problems.append(issue("error", "invalid_reference_exemption", "Exemption must name an included Markdown file under references/.", exemption))
+    stats["reference_exemptions"] = sorted(exemptions)
+    for rel, path in sorted(references.items()):
+        if path not in reached and rel not in exemptions:
+            problems.append(issue("warning", "undiscoverable_references", "No supported local-file link path from SKILL.md reaches this reference; link it or document an explicit exemption. Directory links do not imply file reachability.", rel))
     return _report(root, stats, problems, excluded)
 
 
@@ -352,8 +433,8 @@ def init_skill(name: str, description: str, output_parent: Path) -> Path:
     validate_name(name)
     if not isinstance(description, str) or not description.strip() or len(description) > 1024:
         raise SkillError("Description must contain 1–1024 characters.")
-    if any(ord(c) < 32 for c in description):
-        raise SkillError("Description must be a single line without control characters.")
+    if any(unicodedata.category(c) in {"Cc", "Cs", "Zl", "Zp"} for c in description):
+        raise SkillError("Description must be a single line without control characters, Unicode line separators, or surrogates.")
     parent = output_parent.expanduser().resolve()
     parent.mkdir(parents=True, exist_ok=True)
     target = parent / name

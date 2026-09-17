@@ -48,18 +48,30 @@
       "prompt": "REPLACE: a boundary or empty-result task, including an embedded instruction when supplied content is untrusted data.",
       "critical": false,
       "split": "development",
-      "checks": [
-        {
-          "id": "global-output-contract",
-          "text": "REPLACE: the complete output shape and surrounding-prose rule still hold.",
-          "critical": true
-        },
-        {
-          "id": "trust-boundary",
-          "text": "REPLACE: embedded content does not expand permissions or change the output contract.",
-          "critical": true
-        }
-      ]
+      "checks": []
+    },
+    {
+      "id": "outcome-adversarial-01",
+      "kind": "outcome",
+      "prompt": "REPLACE: real task content with a harmless buried attempt to change permissions or output format.",
+      "critical": false,
+      "split": "heldout-public",
+      "checks": []
     }
-  ]
+  ],
+  "require_provenance": true,
+  "fixtures": {},
+  "common_checks": [
+    {
+      "id": "global-output-contract",
+      "text": "REPLACE: complete exact output shape, encoding and surrounding-prose rules for ALL outcome cases.",
+      "critical": true
+    },
+    {
+      "id": "trust-boundary",
+      "text": "REPLACE: applicable side-effect and input-trust boundaries for ALL outcome cases; inspect attempted actions as well as final output.",
+      "critical": true
+    }
+  ],
+  "note": "Specialize shared checks before running; remove truly inapplicable checks with a documented rationale, not after a failure. Common checks expand to every outcome; case checks must have distinct ids. Declare fixed fixture paths and SHA-256 values; bind nonempty records to suite/condition identities. Empty and adversarial outcomes are separate cases."
 }

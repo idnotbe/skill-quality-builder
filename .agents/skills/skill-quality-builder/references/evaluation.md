@@ -58,10 +58,16 @@ Check statuses are `pass`, `fail`, `not_run`, or `not_applicable`. Evidence is r
 Run:
 
 ```text
-python <THIS_SKILL_DIR>/scripts/summarize_evals.py <suite.json> <observations.json>
+python -B <THIS_SKILL_DIR>/scripts/summarize_evals.py <suite.json> <observations.json>
 ```
 
 The script rejects unknown IDs, duplicate observations/checks, invalid types, and inconsistent suite IDs. It reports each condition separately, coverage, trigger confusion counts, outcome counts, and critical blockers. Its exit code 0 means the JSON was valid, not that the skill passed. It does not verify the truth of evidence strings, judge semantic quality, establish statistical significance, or authorize deployment.
+
+## Shared checks, fixed fixtures, and condition identity
+
+Optional `common_checks` expands into every outcome case and must not duplicate case-local IDs. Include its checks in each observation. New shipped suites set `require_provenance: true`: nonempty records must bind the exact suite, fixed fixture manifest and each condition's skill digest, with matched model/host/tools/permissions/budget. Legacy unbound suites remain readable but are explicitly labeled unbound.
+
+Read [reuse verification](reuse-verification.md) when using those fields, preparing cross-project reuse, or testing a generated child skill. It defines the digest format, fixed-fixture materialization and the two-stage builder-to-child experiment. The CLI verifies declared fixture bytes; it does not authenticate observation claims. Empty records remain unverified without invented hashes.
 
 ## Decision gates
 

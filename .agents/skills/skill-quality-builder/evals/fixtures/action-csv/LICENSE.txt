@@ -1,0 +1,2 @@
+Synthetic test fixture. Permission is granted to copy and modify it for testing.
+Preserve this notice when testing license preservation.
