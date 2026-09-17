@@ -30,6 +30,10 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Helper tests, initialization, and package/extract regressions
         run: python -B -m unittest discover -s tests -v
+      - name: Balanced catalog regeneration and fixture integrity
+        run: |
+          python -B evaluation/build_catalog.py --check
+          python -B evaluation/harness.py check
       - name: Full installed-bundle structural lint
         run: python -B .agents/skills/skill-quality-builder/scripts/lint_skill.py .agents/skills/skill-quality-builder --format json
       - name: Confirm host evaluation is still explicitly unverified
