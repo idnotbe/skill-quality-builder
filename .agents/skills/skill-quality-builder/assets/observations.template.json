@@ -19,7 +19,17 @@
         "host": "",
         "tools": "",
         "permissions": "",
-        "budget": ""
+        "budget": "",
+        "execution_context": {
+          "builder_model": "",
+          "executor_model": "",
+          "host_version": "",
+          "effort": "",
+          "thinking_mode": "",
+          "output_budget": "",
+          "instruction_stack_sha256": "",
+          "profile_sha256": ""
+        }
       },
       "candidate": {
         "skill_sha256": "",
@@ -28,7 +38,17 @@
         "host": "",
         "tools": "",
         "permissions": "",
-        "budget": ""
+        "budget": "",
+        "execution_context": {
+          "builder_model": "",
+          "executor_model": "",
+          "host_version": "",
+          "effort": "",
+          "thinking_mode": "",
+          "output_budget": "",
+          "instruction_stack_sha256": "",
+          "profile_sha256": ""
+        }
       }
     }
   }

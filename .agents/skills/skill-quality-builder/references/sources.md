@@ -32,3 +32,12 @@ Standard constraints outrank incidental examples. Official recommendations, proj
 S01 establishes format; S02–S06 inform authoring and evaluation; S07–S09 motivate packaging and trust checks; S10–S13 inform host differences and implementation patterns. S14–S16 supply concrete project experience, not mandatory universal policies. S17 warns that discovery must be tested. S18 (v4) and S19 (v1) support matched evaluation and task-dependent structural effects, not fixed performance promises. S20–S22 inform context and operational boundaries.
 
 The ten-round ceiling, four result states, conservative packager, and preservation/report schemas are original engineering choices for this package. They are not claimed as official Agent Skills requirements.
+
+## Model-aware improvement update — verified 2026-09-17
+
+- **S23 — OpenAI:** [Model guidance / prompting best practices](https://developers.openai.com/api/docs/guides/latest-model). Live guidance read for Astra; profiles are scoped hypotheses, not unconditional policies.
+- **S24 — Anthropic:** [Prompting Claude Fable 5.1](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1). Host/API integration advice is separated from skill text.
+- **S25 — Anthropic:** [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents), 2026-01-09. Outcome grading, grader calibration, capability/regression distinction.
+- **S26 — Research:** [GEPA](https://arxiv.org/abs/2507.19457); [ACE](https://arxiv.org/abs/2510.04618). Design motivation for feedback-driven candidates and incremental knowledge preservation, not a performance guarantee or bundled optimizer.
+
+The model profiles, experiment protocol, rule categories and candidate lifecycle are this project's engineering choices. Evidence kinds and provenance are not proof that an adapter actually used a named model. The new runtime tests use synthetic adapters only; real model comparisons remain not_run until recorded.

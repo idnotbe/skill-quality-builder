@@ -23,6 +23,8 @@ MAX_JSON_BYTES = 10 * 1024 * 1024
 MAX_SLOTS = 100000
 MAX_FIXTURE_FILES = 2000
 MAX_FIXTURE_TOTAL_BYTES = 100 * 1024 * 1024
+DIMENSIONS = {"completion", "correctness", "judgment", "usefulness", "safety", "format", "unspecified"}
+EXECUTION_FIELDS = ("executor_model", "host_version", "effort", "thinking_mode", "output_budget", "instruction_stack_sha256", "profile_sha256")
 
 
 class EvaluationError(ValueError):
@@ -111,6 +113,7 @@ def validate_provenance(suite: dict[str, Any], observations: dict[str, Any]) -> 
     require(isinstance(by_condition, dict) and set(by_condition) == set(suite["conditions"]),
             "Provenance must identify exactly the declared conditions.")
     expected_fixtures = canonical_digest(suite.get("fixtures", {}))
+    contexts = []
     environment_keys = ("model", "host", "tools", "permissions", "budget")
     environments = []
     for condition in suite["conditions"]:
@@ -125,6 +128,19 @@ def validate_provenance(suite: dict[str, Any], observations: dict[str, Any]) -> 
         require(info["model"] == observations["metadata"]["model"] and info["host"] == observations["metadata"]["host"],
                 f"Global model/host metadata disagrees with {condition}.")
         environments.append(tuple(info[key] for key in environment_keys))
+        context = info.get("execution_context")
+        if suite.get("require_execution_context", False) or context is not None:
+            require(isinstance(context, dict), f"{condition} needs execution_context.")
+            for key in EXECUTION_FIELDS:
+                require(nonempty(context.get(key)), f"{condition}.execution_context.{key} is required.")
+            require(context["executor_model"] == info["model"], "Executor model disagrees with condition model.")
+            for key in ("instruction_stack_sha256", "profile_sha256"):
+                require(sha256_string(context[key]), f"{condition}.{key} must be a SHA-256 digest.")
+            require(nonempty(context.get("builder_model")), f"{condition} needs builder_model (or none for a human/no-skill baseline).")
+            contexts.append(tuple(context[key] for key in EXECUTION_FIELDS))
+    require(not contexts or len(contexts) == len(suite["conditions"]), "Do not mix bound and unbound execution contexts.")
+    require(not contexts or all(item == contexts[0] for item in contexts),
+            "Executor settings differ: compare skill candidates within matched model/host/effort cohorts.")
     require(all(env == environments[0] for env in environments), "Baseline/candidate environment mismatch.")
     return "declared_identities_match"
 
@@ -134,6 +150,8 @@ def validate_suite(suite: dict[str, Any]) -> dict[str, dict[str, Any]]:
     require(type(suite.get("schema_version")) is int and suite["schema_version"] == 1, "Suite schema_version must be integer 1.")
     require(nonempty(suite.get("suite_id")), "suite_id must be a nonempty string.")
     require(type(suite.get("require_provenance", False)) is bool, "require_provenance must be Boolean.")
+    require(type(suite.get("require_execution_context", False)) is bool, "require_execution_context must be Boolean.")
+    require(not suite.get("require_execution_context") or suite.get("require_provenance"), "Execution context requires provenance.")
     fixtures = suite.get("fixtures", {})
     require(isinstance(fixtures, dict), "fixtures must be a path-to-SHA256 object.")
     require(len(fixtures) <= MAX_FIXTURE_FILES, "Too many fixture files.")
@@ -147,6 +165,7 @@ def validate_suite(suite: dict[str, Any]) -> dict[str, dict[str, Any]]:
         require(isinstance(check, dict) and nonempty(check.get("id")) and nonempty(check.get("text"))
                 and type(check.get("critical")) is bool, "Invalid common check.")
         require(check["id"] not in common_ids, "Duplicate common check id.")
+        require(isinstance(check.get("dimension", "unspecified"), str) and check.get("dimension", "unspecified") in DIMENSIONS, "Unknown common check dimension.")
         common_ids.add(check["id"])
     conditions = suite.get("conditions")
     require(isinstance(conditions, list) and len(conditions) > 0, "conditions must be a nonempty list.")
@@ -166,6 +185,11 @@ def validate_suite(suite: dict[str, Any]) -> dict[str, dict[str, Any]]:
         require(cid not in case_map, f"Duplicate case id: {cid}")
         require(nonempty(case.get("prompt")), f"Case {cid} needs a prompt.")
         require(type(case.get("critical")) is bool, f"Case {cid} critical must be Boolean.")
+        require(case.get("evaluation_role", "regression") in ("regression", "capability"), f"Unknown evaluation_role for {cid}.")
+        inputs = case.get("input_files", [])
+        require(isinstance(inputs, list) and all(isinstance(x, str) and x in fixtures for x in inputs),
+                f"{cid}.input_files must select declared fixture paths, never judge-only answers.")
+        require(len(set(inputs)) == len(inputs), f"Duplicate input_files in {cid}.")
         kind = case.get("kind")
         require(kind in ("trigger", "outcome"), f"Unknown kind for {cid}.")
         if kind == "trigger":
@@ -185,6 +209,7 @@ def validate_suite(suite: dict[str, Any]) -> dict[str, dict[str, Any]]:
                 require(check_id not in ids, f"Duplicate check id in {cid}: {check_id}")
                 require(nonempty(check.get("text")), f"Check {cid}/{check_id} needs text.")
                 require(type(check.get("critical")) is bool, f"Check {cid}/{check_id} critical must be Boolean.")
+                require(isinstance(check.get("dimension", "unspecified"), str) and check.get("dimension", "unspecified") in DIMENSIONS, f"Unknown dimension: {cid}/{check_id}")
                 ids.add(check_id)
             units += len(checks)
         case_map[cid] = case
@@ -256,7 +281,7 @@ def summarize(suite: dict[str, Any], observation_file: dict[str, Any]) -> dict[s
             for rep in range(1, reps + 1):
                 row = indexed.get((cid, condition, rep))
                 supplied_rows += int(row is not None)
-                detail: dict[str, Any] = {"case_id": cid, "repetition": rep, "kind": case["kind"]}
+                detail: dict[str, Any] = {"case_id": cid, "repetition": rep, "kind": case["kind"], "evaluation_role": case.get("evaluation_role", "regression"), "split": case.get("split", "unspecified")}
                 if case["kind"] == "trigger":
                     trigger_expected += 1
                     triggered = row.get("triggered") if row else None
@@ -287,7 +312,7 @@ def summarize(suite: dict[str, Any], observation_file: dict[str, Any]) -> dict[s
                             critical_fail += int(status == "fail")
                             critical_na += int(status == "not_applicable")
                             critical_missing += int(status == "not_run")
-                        detailed_checks.append({"id": check["id"], "critical": critical, "status": status, "evidence": observed.get("evidence", "") if observed else ""})
+                        detailed_checks.append({"id": check["id"], "dimension": check.get("dimension", "unspecified"), "critical": critical, "status": status, "evidence": observed.get("evidence", "") if observed else ""})
                     detail["checks"] = detailed_checks
                 details.append(detail)
         trigger_missing = trigger_expected - trigger_observed
@@ -322,6 +347,17 @@ def summarize(suite: dict[str, Any], observation_file: dict[str, Any]) -> dict[s
             "critical": {"fail": critical_fail, "not_applicable_unresolved": critical_na, "not_run": critical_missing},
             "details": details,
         }
+    for condition in result_conditions.values():
+        dimensions: dict[str, dict[str, int]] = {}
+        roles: dict[str, dict[str, int]] = {}
+        for case in condition["details"]:
+            if case["kind"] != "outcome":
+                continue
+            for check in case["checks"]:
+                for grouped, name in ((dimensions, check["dimension"]), (roles, case["evaluation_role"])):
+                    grouped.setdefault(name, {s: 0 for s in sorted(STATUSES)})[check["status"]] += 1
+        condition["by_dimension"] = dimensions
+        condition["by_evaluation_role"] = roles
     kind = metadata.get("evidence_kind") if rows else None
     return {
         "schema_version": 1,
@@ -334,6 +370,7 @@ def summarize(suite: dict[str, Any], observation_file: dict[str, Any]) -> dict[s
         "suite_sha256": canonical_digest(suite),
         "fixtures_sha256": canonical_digest(suite.get("fixtures", {})),
         "conditions": result_conditions,
+        "paired_comparisons": paired_comparisons(result_conditions),
         "notes": [
             "The tool aggregates records only. It does not run a model, verify evidence, or approve a release.",
             "Empty or missing records remain not_run. N/A is never positive evidence; critical N/A blocks validation.",
@@ -342,6 +379,39 @@ def summarize(suite: dict[str, Any], observation_file: dict[str, Any]) -> dict[s
             "Exit code 0 means the input was valid, not that the evaluated skill passed.",
         ],
     }
+
+
+def paired_comparisons(conditions: dict[str, Any]) -> dict[str, Any]:
+    """Descriptive matched assertions, not independent trials or statistical proof."""
+    if "baseline" not in conditions:
+        return {}
+    def flatten(condition: dict[str, Any]) -> dict[tuple[Any, ...], dict[str, Any]]:
+        result = {}
+        for case in condition["details"]:
+            checks = case.get("checks", [{"id": "trigger", "status": case.get("status"), "dimension": "trigger", "critical": False}])
+            for check in checks:
+                result[(case["case_id"], case["repetition"], check["id"])] = dict(check, evaluation_role=case["evaluation_role"])
+        return result
+    baseline = flatten(conditions["baseline"])
+    comparisons = {}
+    for name, condition in conditions.items():
+        if name == "baseline":
+            continue
+        counts = {key: 0 for key in ("improved", "regressed", "both_pass", "both_fail", "not_comparable")}
+        by_dimension: dict[str, dict[str, int]] = {}
+        for slot, current in flatten(condition).items():
+            old = baseline[slot]
+            a, b = old["status"], current["status"]
+            label = ("not_comparable" if a not in {"pass", "fail"} or b not in {"pass", "fail"}
+                     else "improved" if (a, b) == ("fail", "pass")
+                     else "regressed" if (a, b) == ("pass", "fail")
+                     else "both_pass" if b == "pass" else "both_fail")
+            counts[label] += 1
+            by_dimension.setdefault(current["dimension"], {k: 0 for k in counts})[label] += 1
+        comparisons[name] = {**counts, "by_dimension": by_dimension,
+                             "release_recommendation": "not_computed",
+                             "interpretation": "Paired assertion counts only; no causal, independent-sample, or model-quality claim. Inspect critical blockers, coverage and cohort identity."}
+    return comparisons
 
 
 def main() -> int:

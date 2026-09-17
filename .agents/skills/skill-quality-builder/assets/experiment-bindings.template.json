@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "environment": {
+    "model": "REPLACE actual executor model",
+    "host": "REPLACE actual host",
+    "tools": "REPLACE tool inventory",
+    "permissions": "REPLACE enforced boundaries",
+    "budget": "REPLACE common budget"
+  },
+  "execution_context": {
+    "executor_model": "REPLACE same executor model",
+    "host_version": "REPLACE version",
+    "effort": "REPLACE actual effort",
+    "thinking_mode": "REPLACE actual mode",
+    "output_budget": "REPLACE actual limit",
+    "instruction_stack_sha256": "REPLACE digest",
+    "profile_sha256": "REPLACE digest"
+  },
+  "conditions": {
+    "baseline": {
+      "skill_dir": null,
+      "builder_model": "none"
+    },
+    "candidate": {
+      "skill_dir": "REPLACE/path/to/skill",
+      "builder_model": "REPLACE builder model"
+    }
+  }
+}
