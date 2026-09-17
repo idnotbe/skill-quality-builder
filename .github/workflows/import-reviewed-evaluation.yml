@@ -1,0 +1,87 @@
+name: Import reviewed evaluation package
+on:
+  push:
+    branches: [feat/balanced-evaluation-20260918]
+    paths: [.github/workflows/import-reviewed-evaluation.yml]
+permissions:
+  contents: write
+concurrency:
+  group: reviewed-evaluation-import
+  cancel-in-progress: false
+jobs:
+  import:
+    if: github.repository == 'idnotbe/skill-quality-builder'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: feat/balanced-evaluation-20260918
+          fetch-depth: 0
+      - name: Verify payload and write only reviewed paths
+        run: |
+          test "$(git rev-parse origin/main)" = 14d607873f0626e7a938d7855d391fb6916e5d4c
+          python -B - <<'PY'
+          import base64, hashlib, json, lzma
+          from pathlib import Path, PurePosixPath
+          hashes=['fdd72b799748b66185b38801b4674a1f3b0781ee33231bf39cddd6d704662468','271f9b2bfef09a5fe6a60bf7f6d5f82f49af49df71634a2d406bb346b2a952f1','d520481201def8ba889119f395142cea9b5229c5d0ce245735a67d2fb29c18e1','c9388ae2ae5424650a2fbead48aac2ec2b88b84a974f801cff0efff0e607acc2']
+          parts=[]
+          for i, expected in enumerate(hashes):
+              b=Path(f'.evaluation-transfer/part-{i}.b64').read_bytes()
+              assert len(b)==13624 and hashlib.sha256(b).hexdigest()==expected, f'transfer part {i} differs'
+              parts.append(b)
+          dec=lzma.LZMADecompressor(memlimit=268435456)
+          raw=dec.decompress(base64.b64decode(b''.join(parts),validate=True),max_length=250000)
+          assert dec.eof and not dec.unused_data
+          assert len(raw)==186371 and hashlib.sha256(raw).hexdigest()=='b35a9d49aa05a9569085ca7531d6a3541d86c4e60a60e83463b3b213bd1625ac'
+          files=json.loads(raw)
+          assert len(files)==21
+          permitted={'.gitattributes','.github/workflows/ci.yml','README.md','tests/test_balanced_evaluation.py'}
+          for name, content in files.items():
+              p=PurePosixPath(name)
+              assert not p.is_absolute() and '..' not in p.parts and '\\' not in name
+              assert name in permitted or name.startswith('evaluation/')
+              dest=Path(name)
+              assert not any(q.is_symlink() for q in [dest,*dest.parents])
+              dest.parent.mkdir(parents=True,exist_ok=True)
+              dest.write_bytes(content.encode('utf-8'))
+          print('Verified and imported',len(files),'reviewed files')
+          PY
+      - name: Regenerate catalog and rerun complete verification
+        run: |
+          python -B evaluation/build_catalog.py
+          python -B evaluation/build_catalog.py --check
+          python -B evaluation/harness.py check | tee "$RUNNER_TEMP/import-catalog.json"
+          python -B -m unittest discover -s tests -v > "$RUNNER_TEMP/import-tests.txt" 2>&1 || { cat "$RUNNER_TEMP/import-tests.txt"; exit 1; }
+          tail -6 "$RUNNER_TEMP/import-tests.txt"
+          python -B .agents/skills/skill-quality-builder/scripts/lint_skill.py .agents/skills/skill-quality-builder --format json > "$RUNNER_TEMP/import-lint.json"
+          git diff --check
+      - name: Remove temporary files and publish only task branch
+        run: |
+          python -B - <<'PY'
+          from pathlib import Path
+          for i in range(4): Path(f'.evaluation-transfer/part-{i}.b64').unlink()
+          Path('.evaluation-transfer').rmdir()
+          Path('.github/workflows/eval-discovery.yml').unlink()
+          Path('.github/workflows/import-reviewed-evaluation.yml').unlink()
+          PY
+          git add .gitattributes .github/workflows README.md evaluation tests/test_balanced_evaluation.py .evaluation-transfer
+          git diff --cached --check
+          git -c user.name='idnotbe' -c user.email='44212813+idnotbe@users.noreply.github.com' commit -m 'test: add balanced 108-case evaluation, hardened harness and honest evidence'
+          git push origin HEAD:refs/heads/feat/balanced-evaluation-20260918
+          git status --porcelain > "$RUNNER_TEMP/import-git-status.txt"
+          test ! -s "$RUNNER_TEMP/import-git-status.txt"
+          git rev-parse HEAD > "$RUNNER_TEMP/import-head.txt"
+          git bundle create "$RUNNER_TEMP/published-evaluation.bundle" HEAD
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: published-evaluation
+          path: |
+            ${{ runner.temp }}/import-*.txt
+            ${{ runner.temp }}/import-*.json
+            ${{ runner.temp }}/published-evaluation.bundle
+          retention-days: 3
