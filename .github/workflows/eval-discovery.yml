@@ -1,0 +1,61 @@
+name: Evaluation capability and source discovery
+on:
+  push:
+    branches: [feat/balanced-evaluation-20260918]
+    paths: [.github/workflows/eval-discovery.yml]
+permissions:
+  contents: read
+  models: read
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Snapshot primary sources and test one bounded inference request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python - <<'PY'
+          import json, os, pathlib, subprocess, urllib.request, urllib.error
+          out = pathlib.Path('discovery'); out.mkdir()
+          sources = [('anthropics/skills', ['skills/skill-creator', 'LICENSE']), ('benchflow-ai/skillsbench', ['README.md', 'CONTRIBUTING.md', 'LICENSE']), ('skilltester-ai/skilltester', ['README.md', 'LICENSE'])]
+          for repo, paths in sources:
+              dest = pathlib.Path('/tmp') / repo.replace('/', '--')
+              try:
+                  subprocess.run(['git','clone','--depth','1','--filter=blob:none','--sparse','https://github.com/'+repo+'.git',str(dest)],check=True,timeout=60)
+                  subprocess.run(['git','-C',str(dest),'sparse-checkout','set','--no-cone',*paths],check=True,timeout=60)
+                  sha = subprocess.check_output(['git','-C',str(dest),'rev-parse','HEAD'],text=True).strip()
+                  tree = subprocess.check_output(['git','-C',str(dest),'ls-tree','-r','--name-only','HEAD'],text=True)
+                  target=out/repo.replace('/','--'); target.mkdir()
+                  (target/'REVISION').write_text(sha+'\n'); (target/'TREE.txt').write_text(tree)
+                  import shutil
+                  for p in paths:
+                      src=dest/p
+                      if not src.exists(): continue
+                      dst=target/p; dst.parent.mkdir(parents=True,exist_ok=True)
+                      if src.is_dir(): shutil.copytree(src,dst)
+                      else: shutil.copy2(src,dst)
+              except Exception as e:
+                  (out/(repo.replace('/','--')+'.error.txt')).write_text(str(e))
+          endpoint='https://models.github.ai/inference/chat/completions'
+          payload={'model':'openai/gpt-4.1-mini','messages':[{'role':'user','content':'Return exactly the word READY.'}],'max_tokens':16,'temperature':0}
+          req=urllib.request.Request(endpoint,data=json.dumps(payload).encode(),headers={'Authorization':'Bearer '+os.environ['GITHUB_TOKEN'],'Content-Type':'application/json','Accept':'application/json'})
+          record={'endpoint':endpoint,'request':payload}
+          try:
+              with urllib.request.urlopen(req,timeout=60) as r:
+                  record.update(status=r.status,response=json.load(r))
+          except urllib.error.HTTPError as e:
+              record.update(status=e.code,error=e.read(8192).decode(errors='replace'))
+          except Exception as e:
+              record.update(status='unavailable',error=str(e))
+          (out/'model-probe.json').write_text(json.dumps(record,indent=2))
+          print(json.dumps(record,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: evaluation-discovery
+          path: discovery/
+          retention-days: 3
