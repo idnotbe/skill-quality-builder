@@ -1,0 +1,26 @@
+{
+  "cases": 108,
+  "groups": {
+    "trigger": 48,
+    "builder": 30,
+    "adaptation": 6,
+    "calibration": 8,
+    "child_csv": 7,
+    "child_analysis": 2,
+    "child_action": 2,
+    "child_codebook": 5
+  },
+  "trigger_positive": 24,
+  "trigger_negative": 24,
+  "languages": {
+    "en": 89,
+    "ko": 19
+  },
+  "origins": {
+    "adapted_existing_case": 67,
+    "new_case": 36,
+    "adapted_external_data": 5
+  },
+  "status": "catalog_valid_not_model_evaluated",
+  "catalog_sha256": "cf6218dbbb47c7acaec671c1a29c4c2d8d20be20f30c181d1e9f3d36b63d1d25"
+}

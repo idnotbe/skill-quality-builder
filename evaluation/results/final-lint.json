@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "tool": "skill-quality-builder-lint",
+  "root": "/mnt/data/skill-quality-builder/.agents/skills/skill-quality-builder",
+  "status": "pass",
+  "errors": 0,
+  "warnings": 0,
+  "stats": {
+    "file_count": 56,
+    "limits": {
+      "max_files": 2000,
+      "max_file_bytes": 10485760,
+      "max_total_bytes": 104857600
+    },
+    "portability": "portable",
+    "skill_lines": 97,
+    "skill_characters": 12479,
+    "skill_bytes": 12479,
+    "description_characters": 334,
+    "reference_exemptions": []
+  },
+  "issues": [],
+  "excluded": [],
+  "limitations": "Limited scalar YAML and ordinary inline Markdown links only. No model, semantic, complete security, host, or token-count validation."
+}

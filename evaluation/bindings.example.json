@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "evaluation_target": "builder",
+  "environment": {
+    "model": "REPLACE_WITH_OBSERVED_EXECUTOR_MODEL",
+    "host": "REPLACE_WITH_ACTUAL_HOST",
+    "tools": "REPLACE_WITH_ACTUAL_TOOL_AND_INSTALLED_SKILL_INVENTORY",
+    "permissions": "REPLACE_WITH_ENFORCED_PERMISSION_PROFILE",
+    "budget": "REPLACE_WITH_ACTUAL_BUDGET"
+  },
+  "execution_context": {
+    "executor_model": "REPLACE_WITH_OBSERVED_EXECUTOR_MODEL",
+    "host_version": "REPLACE_WITH_ACTUAL_HOST_VERSION",
+    "effort": "REPLACE_WITH_ACTUAL_EFFORT",
+    "thinking_mode": "REPLACE_WITH_ACTUAL_THINKING_MODE",
+    "output_budget": "REPLACE_WITH_ACTUAL_OUTPUT_BUDGET",
+    "instruction_stack_sha256": "REPLACE_WITH_64_HEX_DIGEST",
+    "profile_sha256": "REPLACE_WITH_64_HEX_DIGEST"
+  },
+  "conditions": {
+    "candidate": {
+      "skill_dir": "REPLACE_WITH_ABSOLUTE_PATH_TO_skill-quality-builder",
+      "builder_model": "REPLACE_WITH_ACTUAL_BUILDER_IDENTITY"
+    }
+  }
+}
