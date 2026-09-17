@@ -1,0 +1,3 @@
+# Evaluation manifests hash exact fixture bytes, not normalized text.
+# Keep fixed inputs identical even when a checkout uses core.autocrlf=true.
+/.agents/skills/skill-quality-builder/evals/fixtures/** text eol=lf
