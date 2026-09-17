@@ -46,9 +46,12 @@ jobs:
               assert name in permitted or name.startswith('evaluation/')
               dest=Path(name)
               assert not any(q.is_symlink() for q in [dest,*dest.parents])
+              if name=='.github/workflows/ci.yml':
+                  assert dest.read_bytes()==content.encode('utf-8'), 'Workflow must already be written by the authorized connector'
+                  continue
               dest.parent.mkdir(parents=True,exist_ok=True)
               dest.write_bytes(content.encode('utf-8'))
-          print('Verified and imported',len(files),'reviewed files')
+          print('Verified 21 reviewed files; workflow content was already installed separately')
           PY
       - name: Regenerate catalog and rerun complete verification
         run: |
@@ -59,16 +62,15 @@ jobs:
           tail -6 "$RUNNER_TEMP/import-tests.txt"
           python -B .agents/skills/skill-quality-builder/scripts/lint_skill.py .agents/skills/skill-quality-builder --format json > "$RUNNER_TEMP/import-lint.json"
           git diff --check
-      - name: Remove temporary files and publish only task branch
+      - name: Publish source only to task branch
         run: |
           python -B - <<'PY'
           from pathlib import Path
           for i in range(4): Path(f'.evaluation-transfer/part-{i}.b64').unlink()
           Path('.evaluation-transfer').rmdir()
-          Path('.github/workflows/eval-discovery.yml').unlink()
-          Path('.github/workflows/import-reviewed-evaluation.yml').unlink()
           PY
-          git add .gitattributes .github/workflows README.md evaluation tests/test_balanced_evaluation.py .evaluation-transfer
+          git diff --exit-code -- .github/workflows
+          git add .gitattributes README.md evaluation tests/test_balanced_evaluation.py .evaluation-transfer
           git diff --cached --check
           git -c user.name='idnotbe' -c user.email='44212813+idnotbe@users.noreply.github.com' commit -m 'test: add balanced 108-case evaluation, hardened harness and honest evidence'
           git push origin HEAD:refs/heads/feat/balanced-evaluation-20260918
