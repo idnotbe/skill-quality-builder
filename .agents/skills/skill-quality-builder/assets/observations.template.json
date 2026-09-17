@@ -8,5 +8,28 @@
     "run_context": "",
     "evidence_kind": ""
   },
-  "observations": []
+  "observations": [],
+  "provenance": {
+    "suite_sha256": "",
+    "conditions": {
+      "baseline": {
+        "skill_sha256": "",
+        "fixtures_sha256": "",
+        "model": "",
+        "host": "",
+        "tools": "",
+        "permissions": "",
+        "budget": ""
+      },
+      "candidate": {
+        "skill_sha256": "",
+        "fixtures_sha256": "",
+        "model": "",
+        "host": "",
+        "tools": "",
+        "permissions": "",
+        "budget": ""
+      }
+    }
+  }
 }

@@ -8,7 +8,11 @@ JSON result rather than treating process success as evaluation success.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
+import re
+import stat
 import sys
 from pathlib import Path
 from typing import Any
@@ -17,6 +21,8 @@ STATUSES = {"pass", "fail", "not_run", "not_applicable"}
 EVIDENCE_KINDS = {"host_run", "manual_artifact_review", "simulation"}
 MAX_JSON_BYTES = 10 * 1024 * 1024
 MAX_SLOTS = 100000
+MAX_FIXTURE_FILES = 2000
+MAX_FIXTURE_TOTAL_BYTES = 100 * 1024 * 1024
 
 
 class EvaluationError(ValueError):
@@ -36,8 +42,20 @@ def positive_int(value: Any) -> bool:
     return type(value) is int and value > 0
 
 
+def read_regular_bytes(path: Path, limit: int) -> bytes:
+    """Bounded read without blocking on a POSIX FIFO; inspect stable snapshots only."""
+    entry = path.stat()
+    require(stat.S_ISREG(entry.st_mode), "Input must be a regular file.")
+    require(entry.st_size <= limit, f"Input exceeds the {limit}-byte limit.")
+    descriptor = os.open(path, os.O_RDONLY | getattr(os, "O_NONBLOCK", 0) | getattr(os, "O_BINARY", 0))
+    with os.fdopen(descriptor, "rb") as stream:
+        require(stat.S_ISREG(os.fstat(stream.fileno()).st_mode), "Input must be a regular file.")
+        payload = stream.read(limit + 1)
+    require(len(payload) <= limit, f"Input exceeds the {limit}-byte limit.")
+    return payload
+
+
 def load_json(path: Path) -> dict[str, Any]:
-    require(path.stat().st_size <= MAX_JSON_BYTES, "JSON input exceeds the 10 MiB limit.")
     # Reject duplicate JSON keys rather than silently retaining the last value.
     def pairs(items: list[tuple[str, Any]]) -> dict[str, Any]:
         result: dict[str, Any] = {}
@@ -45,15 +63,91 @@ def load_json(path: Path) -> dict[str, Any]:
             require(key not in result, f"Duplicate JSON property: {key}")
             result[key] = value
         return result
-    value = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=pairs)
+    payload = read_regular_bytes(path, MAX_JSON_BYTES)
+    value = json.loads(payload.decode("utf-8"), object_pairs_hook=pairs)
     require(isinstance(value, dict), "Top-level JSON must be an object.")
     return value
+
+
+def canonical_digest(value: Any) -> str:
+    """SHA-256 of canonical UTF-8 JSON; formatting is not part of suite identity."""
+    encoded = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def sha256_string(value: Any) -> bool:
+    return isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value) is not None
+
+
+def fixture_path(value: Any) -> bool:
+    return (nonempty(value) and not any(ord(c) < 32 for c in value) and "\\" not in value and ":" not in value
+            and not value.startswith("/") and all(part not in ("", ".", "..") for part in value.split("/")))
+
+
+def verify_fixture_files(suite: dict[str, Any], directory: Path) -> None:
+    """Verify declared fixed input bytes without executing them; stable snapshots only."""
+    root = directory.resolve()
+    total = 0
+    fixtures = suite.get("fixtures", {})
+    require(len(fixtures) <= MAX_FIXTURE_FILES, "Too many fixture files.")
+    for relative, expected in fixtures.items():
+        path = (root / relative).resolve()
+        require(path.is_relative_to(root), f"Fixture escapes the suite directory: {relative}")
+        content = read_regular_bytes(path, min(MAX_JSON_BYTES, MAX_FIXTURE_TOTAL_BYTES - total))
+        total += len(content)
+        require(hashlib.sha256(content).hexdigest() == expected, f"Fixture digest mismatch: {relative}")
+
+
+def validate_provenance(suite: dict[str, Any], observations: dict[str, Any]) -> str:
+    """Check declared identities, not whether the supplied observations are true."""
+    if not observations["observations"]:
+        return "not_run"
+    binding = observations.get("provenance")
+    if binding is None and not suite.get("require_provenance", False):
+        return "unbound"
+    require(isinstance(binding, dict), "Nonempty observations require a provenance object.")
+    require(binding.get("suite_sha256") == canonical_digest(suite), "Suite digest mismatch.")
+    by_condition = binding.get("conditions")
+    require(isinstance(by_condition, dict) and set(by_condition) == set(suite["conditions"]),
+            "Provenance must identify exactly the declared conditions.")
+    expected_fixtures = canonical_digest(suite.get("fixtures", {}))
+    environment_keys = ("model", "host", "tools", "permissions", "budget")
+    environments = []
+    for condition in suite["conditions"]:
+        info = by_condition[condition]
+        require(isinstance(info, dict), f"Invalid provenance for {condition}.")
+        identity = info.get("skill_sha256")
+        require(sha256_string(identity) or (condition == "baseline" and identity == "no_skill"),
+                f"{condition} needs a skill SHA-256; only baseline may use no_skill.")
+        require(info.get("fixtures_sha256") == expected_fixtures, f"Fixture manifest digest mismatch: {condition}")
+        for key in environment_keys:
+            require(nonempty(info.get(key)), f"Provenance {condition}.{key} must be nonempty.")
+        require(info["model"] == observations["metadata"]["model"] and info["host"] == observations["metadata"]["host"],
+                f"Global model/host metadata disagrees with {condition}.")
+        environments.append(tuple(info[key] for key in environment_keys))
+    require(all(env == environments[0] for env in environments), "Baseline/candidate environment mismatch.")
+    return "declared_identities_match"
 
 
 def validate_suite(suite: dict[str, Any]) -> dict[str, dict[str, Any]]:
     require(isinstance(suite, dict), "Suite must be an object.")
     require(type(suite.get("schema_version")) is int and suite["schema_version"] == 1, "Suite schema_version must be integer 1.")
     require(nonempty(suite.get("suite_id")), "suite_id must be a nonempty string.")
+    require(type(suite.get("require_provenance", False)) is bool, "require_provenance must be Boolean.")
+    fixtures = suite.get("fixtures", {})
+    require(isinstance(fixtures, dict), "fixtures must be a path-to-SHA256 object.")
+    require(len(fixtures) <= MAX_FIXTURE_FILES, "Too many fixture files.")
+    require(all(fixture_path(path) and sha256_string(digest) for path, digest in fixtures.items()),
+            "Fixture paths must be contained relative paths and digests lowercase SHA-256.")
+    common = suite.get("common_checks", [])
+    require(isinstance(common, list), "common_checks must be a list.")
+    # Validate even when a suite has no outcome cases; do not silently ignore malformed checks.
+    common_ids = set()
+    for check in common:
+        require(isinstance(check, dict) and nonempty(check.get("id")) and nonempty(check.get("text"))
+                and type(check.get("critical")) is bool, "Invalid common check.")
+        require(check["id"] not in common_ids, "Duplicate common check id.")
+        common_ids.add(check["id"])
     conditions = suite.get("conditions")
     require(isinstance(conditions, list) and len(conditions) > 0, "conditions must be a nonempty list.")
     require(all(nonempty(x) for x in conditions), "Every condition must be a nonempty string.")
@@ -66,6 +160,7 @@ def validate_suite(suite: dict[str, Any]) -> dict[str, dict[str, Any]]:
     units = 0
     for case in cases:
         require(isinstance(case, dict), "Each case must be an object.")
+        case = dict(case)  # Expand checks without mutating the caller's suite or its digest.
         cid = case.get("id")
         require(nonempty(cid), "Each case needs a nonempty id.")
         require(cid not in case_map, f"Duplicate case id: {cid}")
@@ -78,7 +173,10 @@ def validate_suite(suite: dict[str, Any]) -> dict[str, dict[str, Any]]:
             units += 1
         else:
             checks = case.get("checks")
-            require(isinstance(checks, list) and len(checks) > 0, f"Outcome {cid} needs checks.")
+            require(isinstance(checks, list), f"Outcome {cid} needs a checks list.")
+            checks = list(common) + checks
+            require(len(checks) > 0, f"Outcome {cid} needs checks.")
+            case["checks"] = checks
             ids: set[str] = set()
             for check in checks:
                 require(isinstance(check, dict), f"Invalid check in {cid}.")
@@ -107,6 +205,7 @@ def summarize(suite: dict[str, Any], observation_file: dict[str, Any]) -> dict[s
         for key in ("model", "host", "skill_version", "run_context"):
             require(nonempty(metadata.get(key)), f"Nonempty observations require metadata.{key}.")
         require(metadata.get("evidence_kind") in EVIDENCE_KINDS, "Unknown or missing metadata.evidence_kind.")
+    provenance_status = validate_provenance(suite, observation_file)
     conditions = suite["conditions"]
     reps = suite["repetitions"]
     indexed: dict[tuple[str, str, int], dict[str, Any]] = {}
@@ -231,6 +330,9 @@ def summarize(suite: dict[str, Any], observation_file: dict[str, Any]) -> dict[s
         "evidence_kind": kind,
         "host_run_records_supplied": bool(rows) and kind == "host_run",
         "evidence_independently_verified": False,
+        "provenance_status": provenance_status,
+        "suite_sha256": canonical_digest(suite),
+        "fixtures_sha256": canonical_digest(suite.get("fixtures", {})),
         "conditions": result_conditions,
         "notes": [
             "The tool aggregates records only. It does not run a model, verify evidence, or approve a release.",
@@ -248,8 +350,11 @@ def main() -> int:
     parser.add_argument("observations", type=Path)
     args = parser.parse_args()
     try:
-        report = summarize(load_json(args.suite), load_json(args.observations))
-    except (OSError, ValueError, TypeError) as exc:
+        suite = load_json(args.suite)
+        validate_suite(suite)
+        verify_fixture_files(suite, args.suite.parent)
+        report = summarize(suite, load_json(args.observations))
+    except (OSError, ValueError, TypeError, RecursionError) as exc:
         print(f"Invalid evaluation input: {exc}", file=sys.stderr)
         return 2
     print(json.dumps(report, ensure_ascii=False, indent=2))

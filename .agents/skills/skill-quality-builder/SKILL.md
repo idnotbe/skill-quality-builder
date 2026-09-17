@@ -9,7 +9,7 @@ Build the smallest useful skill, or improve an existing one without silently cha
 
 ## Entry and boundaries
 
-Classify the request as **create**, **improve**, **audit**, or **trigger-tune**. Audit is read-only for the target. Trigger-tune changes discovery metadata unless broader changes are authorized. If the request is to use an existing skill to do its domain task, do that task through the appropriate capability instead of redesigning it.
+Classify the request as **create**, **improve**, **audit**, or **trigger-tune**. Audit is read-only for the target, including ignored files and newly created caches. For mixed requests, modify only the explicitly authorized part and report other findings without fixing them. Trigger-tune changes discovery metadata unless broader changes are authorized. If the request is to use an existing skill to do its domain task, do that task through the appropriate capability instead of redesigning it.
 
 Before substantial work, state the requested outcome and material constraints. Reuse information already provided. Ask together about unresolved choices that change scope, permissions, output, or success criteria. Do not require a ceremonial approval when the user has already authorized a clear task. Pause at decisions the user reserved. Mark safe assumptions; never invent missing source contents, credentials, tools, or execution results.
 
@@ -49,7 +49,7 @@ For improvement, favor the smallest change addressing an observed failure. Prese
 
 ### 3. Define cases, then build
 
-Before optimizing, set expected outcomes and failure gates. Start with a representative success, a boundary/missing-input case, a near-miss trigger case that differs by the requested contract, and a permissions case where applicable. When a generated skill consumes documents, messages, code, or other task content, state whether embedded instructions are untrusted data and test that they cannot expand permissions or change the output contract. Apply global output requirements to every applicable outcome case, including empty-result behavior.
+Before optimizing, set expected outcomes and failure gates. Start with a representative success, a boundary/missing-input case, a near-miss trigger case that differs by the requested contract, and a permissions case where applicable. When a generated skill consumes documents, messages, code, or other task content, state whether embedded instructions are untrusted data and test that they cannot expand permissions or change the output contract. Apply global output requirements to every applicable outcome case, including empty-result behavior. Use shared checks when they truly apply to every outcome; keep normal, empty, ambiguous and adversarial inputs distinct.
 
 Use the [skill template](assets/skill.template.md) as a starting point, not a mandatory final outline. Remove scaffolding. Include one concise example when it disambiguates behavior, and verify that every shown output obeys the exact output contract, including rules about surrounding prose. Give an observable fallback for missing inputs or tools. Keep broad reasoning flexible; fix exact sequences only where a wrong sequence is harmful.
 
@@ -60,18 +60,18 @@ For rewrites, use the [preservation matrix](assets/preservation.template.md). Do
 Run static checks after changes. Python 3.10+ helpers in this bundle use only the standard library:
 
 ```text
-python <THIS_SKILL_DIR>/scripts/lint_skill.py <TARGET_SKILL_DIR> --format json
-python <THIS_SKILL_DIR>/scripts/init_skill.py --name <new-name> --description <description> --output-parent <workspace>
-python <THIS_SKILL_DIR>/scripts/package_skill.py <TARGET_SKILL_DIR> --output <outside-target.zip>
+python -B <THIS_SKILL_DIR>/scripts/lint_skill.py <TARGET_SKILL_DIR> --format json
+python -B <THIS_SKILL_DIR>/scripts/init_skill.py --name <new-name> --description <description> --output-parent <workspace>
+python -B <THIS_SKILL_DIR>/scripts/package_skill.py <TARGET_SKILL_DIR> --output <outside-target.zip>
 ```
 
 Replace placeholders with actual paths. Paths passed as arguments resolve from the caller's working directory, not automatically from this skill. Quote paths containing spaces. Run each helper with `--help` for its contract. Initialization refuses overwrites; packaging is not installation. [Shared helper implementation](scripts/skill_lib.py) supports these commands.
 
-The linter checks a deliberately limited frontmatter profile, paths, naming, and size heuristics. It does **not** fully validate arbitrary YAML, host compatibility, prompt-injection resistance, or semantic quality. Unsupported optional syntax is a review warning, not proof of invalidity; unparsed required `name` or `description` fields are errors. With no Python or shell, use the same checks manually and mark scripts **not_run**.
+The linter checks a deliberately limited frontmatter profile, paths, naming, reference reachability, and size heuristics. Portable archive names are checked by default; a deliberate native-only opt-out must be reported. Static reachability is not a host branch-read trace. It does **not** fully validate arbitrary YAML, host compatibility, prompt-injection resistance, or semantic quality. Unsupported optional syntax is a review warning, not proof of invalidity; unparsed required `name` or `description` fields are errors. With no Python or shell, use the same checks manually and mark scripts **not_run**.
 
-Run real tasks in clean sessions when available. For new skills compare against no skill; for improvements compare against an immutable original. Match model, host, inputs, tools, and budget. Test implicit triggering separately from forced invocation. Observe actual skill reads or host selection events; a model's predicted choice is only a simulation.
+Freeze fixed inputs and the exact candidate before comparing results. Check the full target path/type/content manifest, including additions and deletions, for read-only cases. Run real tasks in clean sessions when available. For new skills compare against no skill; for improvements compare against an immutable original. Match model, host, inputs, tools, and budget. Test implicit triggering separately from forced invocation. Observe actual skill reads or host selection events; a model's predicted choice is only a simulation.
 
-Use [evaluation definitions](assets/evaluation-suite.template.json) and record observations in the [observation template](assets/observations.template.json). [Summarize observations](scripts/summarize_evals.py) computes coverage and metrics; it does not run models or certify correctness. The [meta-skill trigger suite](evals/trigger-suite.json) and [behavior cases](evals/behavior-cases.json) are for testing this builder itself, not mandatory content of every generated skill. Public held-out examples are not truly unseen data.
+Use [evaluation definitions](assets/evaluation-suite.template.json) and record observations in the [observation template](assets/observations.template.json). [Summarize observations](scripts/summarize_evals.py) computes coverage and metrics; it does not run models or certify correctness. The [meta-skill trigger suite](evals/trigger-suite.json) and [behavior cases](evals/behavior-cases.json) are for testing this builder itself, not mandatory content of every generated skill. For cross-project reuse or evaluation binding, read [reuse verification](references/reuse-verification.md): fixed fixtures, per-condition hashes, shared checks and a two-stage [generated-child suite](evals/child-skill-cases.json). A generated SKILL.md must be executed in a fresh session to establish its task behavior; inspecting its instructions is not enough. Public held-out examples are not truly unseen data.
 
 ### 5. Challenge, fix, and stop
 

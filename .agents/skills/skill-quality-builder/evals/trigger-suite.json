@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
-  "suite_id": "skill-quality-builder-trigger-v1",
+  "suite_id": "skill-quality-builder-trigger-v2",
   "conditions": [
     "candidate"
   ],
   "repetitions": 1,
   "case_status": "not_run",
-  "note": "Public sample split only. No actual host or model observations are provided. Run natural prompts without explicitly invoking the builder; observe host selection/read events. Cases mentioning attachment require the evaluator to supply a suitable harmless fixture.",
+  "note": "No host observations are supplied. For prompts referring to a target or attachment, mount only fixtures/action-csv in a scratch project as target/action-csv/ and rename SKILL.fixture.md to SKILL.md. Never install fixture directories as independent skills. Run natural prompts without forced invocation; observe host selection/read events. Run once with this builder alone and separately with a competing authoring skill installed; use separate observation files and record exact installed tools in provenance. Public heldout cases are not truly unseen.",
   "cases": [
     {
       "id": "positive-01",
@@ -199,6 +199,76 @@
       "should_trigger": false,
       "critical": false,
       "split": "heldout"
+    },
+    {
+      "id": "ko-create",
+      "kind": "trigger",
+      "prompt": "회의록에서 확정된 업무만 추출하는 절차를 다른 프로젝트에서도 불러 쓸 수 있는 Codex용 재사용 번들로 만들어라.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "heldout-public"
+    },
+    {
+      "id": "mixed-language",
+      "kind": "trigger",
+      "prompt": "첨부한 SKILL.md의 description만 좁혀줘. Body와 나머지 파일은 유지해.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "heldout-public"
+    },
+    {
+      "id": "implicit-authoring",
+      "kind": "trigger",
+      "prompt": "Package our repeatable review procedure as an installable agent capability for other repositories, with invocation rules and regression cases.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "heldout-public"
+    },
+    {
+      "id": "mixed-scope",
+      "kind": "trigger",
+      "prompt": "Audit this reusable bundle and fix only its spelling mistake; do not implement the other findings.",
+      "should_trigger": true,
+      "critical": false,
+      "split": "heldout-public"
+    },
+    {
+      "id": "ko-domain-task",
+      "kind": "trigger",
+      "prompt": "이 회의록에서 확정된 업무를 추출해서 표로 보여줘.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "heldout-public"
+    },
+    {
+      "id": "implicit-near-miss",
+      "kind": "trigger",
+      "prompt": "Use the existing procedure to produce the report for this input.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "heldout-public"
+    },
+    {
+      "id": "ko-explanation",
+      "kind": "trigger",
+      "prompt": "progressive disclosure가 무엇인지 설명해줘.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "heldout-public"
+    },
+    {
+      "id": "generic-prompt",
+      "kind": "trigger",
+      "prompt": "Make this one-off email instruction clearer.",
+      "should_trigger": false,
+      "critical": false,
+      "split": "heldout-public"
     }
-  ]
+  ],
+  "require_provenance": true,
+  "fixtures": {
+    "fixtures/action-csv/LICENSE.txt": "3ff0bfb03ce67ed356349e6b746d0b9553dbd4ccfcb7f575fbf73b95fcba058d",
+    "fixtures/action-csv/SKILL.fixture.md": "85ffc1b4ea774641cd02417b31747cec5a0d4f51666077ac134d1e15006d496a",
+    "fixtures/action-csv/references/edge-cases.md": "5733734200cca3971f0c53c457d501e9d5136c6334886ddeee0e7b8a2651761f"
+  }
 }

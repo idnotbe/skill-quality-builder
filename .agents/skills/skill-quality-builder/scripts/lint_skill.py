@@ -5,6 +5,9 @@ import argparse
 import json
 import sys
 from pathlib import Path
+if __name__ == "__main__":
+    sys.dont_write_bytecode = True
+
 from skill_lib import lint_skill
 
 
@@ -12,9 +15,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("skill_dir", type=Path, help="Skill directory, relative to caller cwd or absolute")
     parser.add_argument("--format", choices=("text", "json"), default="text")
+    parser.add_argument("--portability", choices=("portable", "native"), default="portable")
+    parser.add_argument("--reference-exempt", action="append", default=[], help="Exact references/*.md path excluded from reachability warnings; record the reason in the review")
     args = parser.parse_args()
     try:
-        report = lint_skill(args.skill_dir)
+        report = lint_skill(args.skill_dir, portability=args.portability, reference_exemptions=tuple(args.reference_exempt))
     except (OSError, ValueError) as exc:
         print(f"Input/IO error: {exc}", file=sys.stderr)
         return 2
