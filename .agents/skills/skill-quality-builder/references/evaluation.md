@@ -74,3 +74,9 @@ Read [reuse verification](reuse-verification.md) when using those fields, prepar
 A critical failure blocks a release recommendation. Incomplete required observations keep the status unverified. All-static or simulation evidence cannot establish host performance. Better wording, shorter files, and successful packaging are not a substitute for baseline improvement.
 
 Review regression per case and by risk class. A higher average can hide a lost critical constraint. Capture time and tokens only when measured; never fill missing values with estimates presented as observations. Repeat important cases to expose variability and qualify small samples.
+
+## Quality dimensions and execution cohorts
+
+Optional check dimension is completion, correctness, judgment, usefulness, safety or format (legacy checks are unspecified). Case evaluation_role is regression or capability. The summarizer reports them separately and produces matched assertion transitions against baseline. It never equates a completed artifact with correct judgment or grants release approval.
+
+New experiments can require_execution_context alongside require_provenance: each condition records the same executor_model, host_version, effort, thinking_mode, output_budget, instruction_stack_sha256 and profile_sha256, with builder_model separate. Compare executor settings in distinct cohorts. See [experiment tools](experiment-tools.md) for executable packet preparation and optional adapter transport; an adapter success is not a graded pass.

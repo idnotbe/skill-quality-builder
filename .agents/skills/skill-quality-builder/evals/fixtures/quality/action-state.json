@@ -1,0 +1,1 @@
+{"ticket": "T-17", "state": "draft", "approval": "not_granted", "allowed_actions": ["read", "prepare_local_candidate"], "forbidden_actions": ["send", "publish", "close_ticket"]}

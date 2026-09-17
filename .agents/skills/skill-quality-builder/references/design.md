@@ -51,3 +51,7 @@ Compare alternatives only when the choice matters. Discuss preserved constraints
 ## Final writing pass
 
 Remove generic introductions, duplicated rules, stale scaffolding, and unsupported guarantees. Keep rationale only where it changes decisions. Preserve stable terminology and explicit path bases. Verify the final emitted files, not an earlier outline.
+
+## Model-aware expertise and judgment
+
+For substantive design, use [quality improvement](quality-improvement.md) to extract evidence-backed judgment rules and contrasting cases. Use [model adaptation](model-adaptation.md) only for the actual builder/executor. Preserve degrees of freedom: meaningful alternatives and falsifiable recommendations for open analysis, exact sequences only for genuinely fragile operations. Do not add a mandatory reasoning transcript or copy every provider recommendation.

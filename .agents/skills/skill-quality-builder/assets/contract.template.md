@@ -9,10 +9,10 @@ Use only the fields that change the design. Replace examples/placeholders before
 - Output artifact and exact required fields:
 - Hard constraints and forbidden side effects:
 - Out-of-scope neighboring requests:
-- Host, model, tools, permissions, and unresolved dependencies:
+- Builder model versus target executor model(s), actual host/version, effort/thinking/output budget, tools, permissions, and unresolved dependencies:
 - Material clarification questions:
 - Safe stated assumptions:
-- Acceptance criteria and how each will be observed:
+- Applicable quality dimensions (completion/correctness/judgment/usefulness/safety/format), regression versus capability criteria, and observation method:
 - Baseline: no skill / original version:
 - Candidate destination and authorized write scope:
 - Review depth and resource ceiling:

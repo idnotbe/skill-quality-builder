@@ -23,3 +23,7 @@ List required bundle files, verified installation/use guidance, dependencies, an
 ## Open risks and next verification
 
 State remaining unknowns, regression risks, and the specific real tasks needed to validate them. Keep this proportionate to the task.
+
+## Substantive quality evidence (when applicable)
+
+Identify builder and executor settings, observed failure versus causal hypothesis, candidate/removal comparisons, matched coverage and per-dimension regressions. State grader calibration, private-transfer status and human rework where observed. Record obsolete-rule removal or unchanged/split/tool/retire decisions. A completed adapter process is not model-quality evidence.

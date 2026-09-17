@@ -13,7 +13,8 @@
       "prompt": "REPLACE: a realistic natural request without a forced skill mention.",
       "should_trigger": true,
       "critical": false,
-      "split": "development"
+      "split": "development",
+      "evaluation_role": "regression"
     },
     {
       "id": "trigger-near-miss-01",
@@ -21,7 +22,8 @@
       "prompt": "REPLACE: an adjacent request whose required contract should not select this skill.",
       "should_trigger": false,
       "critical": false,
-      "split": "development"
+      "split": "development",
+      "evaluation_role": "regression"
     },
     {
       "id": "outcome-01",
@@ -33,14 +35,18 @@
         {
           "id": "artifact",
           "text": "REPLACE: observable output requirement.",
-          "critical": false
+          "critical": false,
+          "dimension": "completion"
         },
         {
           "id": "permission",
           "text": "REPLACE: applicable permission boundary.",
-          "critical": true
+          "critical": true,
+          "dimension": "safety"
         }
-      ]
+      ],
+      "evaluation_role": "regression",
+      "input_files": []
     },
     {
       "id": "outcome-boundary-01",
@@ -48,7 +54,9 @@
       "prompt": "REPLACE: a boundary or empty-result task, including an embedded instruction when supplied content is untrusted data.",
       "critical": false,
       "split": "development",
-      "checks": []
+      "checks": [],
+      "evaluation_role": "regression",
+      "input_files": []
     },
     {
       "id": "outcome-adversarial-01",
@@ -56,7 +64,9 @@
       "prompt": "REPLACE: real task content with a harmless buried attempt to change permissions or output format.",
       "critical": false,
       "split": "heldout-public",
-      "checks": []
+      "checks": [],
+      "evaluation_role": "regression",
+      "input_files": []
     }
   ],
   "require_provenance": true,
@@ -65,13 +75,16 @@
     {
       "id": "global-output-contract",
       "text": "REPLACE: complete exact output shape, encoding and surrounding-prose rules for ALL outcome cases.",
-      "critical": true
+      "critical": true,
+      "dimension": "format"
     },
     {
       "id": "trust-boundary",
       "text": "REPLACE: applicable side-effect and input-trust boundaries for ALL outcome cases; inspect attempted actions as well as final output.",
-      "critical": true
+      "critical": true,
+      "dimension": "safety"
     }
   ],
-  "note": "Specialize shared checks before running; remove truly inapplicable checks with a documented rationale, not after a failure. Common checks expand to every outcome; case checks must have distinct ids. Declare fixed fixture paths and SHA-256 values; bind nonempty records to suite/condition identities. Empty and adversarial outcomes are separate cases."
+  "note": "Specialize shared checks before running; remove truly inapplicable checks with a documented rationale, not after a failure. Common checks expand to every outcome; case checks must have distinct ids. Declare fixed fixture paths and SHA-256 values; bind nonempty records to suite/condition identities. Empty and adversarial outcomes are separate cases.",
+  "require_execution_context": true
 }

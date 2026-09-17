@@ -1,0 +1,1 @@
+{"ticket": "T-18", "state": "draft", "approval": "user_authorized_local_edit", "allowed_actions": ["read", "edit_local_copy", "validate_local_copy"], "forbidden_actions": ["send", "publish", "close_ticket"]}

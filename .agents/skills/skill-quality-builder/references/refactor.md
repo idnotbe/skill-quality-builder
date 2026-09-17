@@ -35,3 +35,7 @@ Compare a minimal patch with restructuring when the architecture is questionable
 Run old and candidate versions with identical inputs and environment where possible. Re-run previously passing cases, not only the failing example. Compare actual outcomes and costs. An improved static score is not evidence of improved task success.
 
 Review both omitted and added behavior: did a shorter file lose an exception? Did an apparently helpful instruction add unauthorized transmission? After the final edit, repeat checks on the delivered bytes. Report untested behavior explicitly.
+
+## Compare interventions, including removal
+
+Use [quality improvement](quality-improvement.md) when failure causes are uncertain. Test a minimal contract/removal candidate against knowledge or execution changes. Separate user requirements from removable model workarounds, and consider unchanged/split/tool/retire outcomes. Keep an external evidence record; do not rewrite the whole knowledge base after each self-review.

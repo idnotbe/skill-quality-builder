@@ -27,6 +27,9 @@ All Markdown links below are relative to this skill's directory. Do not read eve
 | Reviewing a substantial change or a failure | [adversarial review](references/adversarial-review.md) | Counterexamples, severity, evidence, targeted retests |
 | Executable code, external tools, installation, host differences | [safety and portability](references/safety-portability.md) | Trust, permissions, dependencies, environment limits |
 | Repeated generic or unreliable instructions | [failure patterns](references/failure-patterns.md) | Replace vague rules with testable actions |
+| Model migration or a model-specific symptom | [model adaptation](references/model-adaptation.md) | Separate builder/executor; read only the applicable official-guide profile |
+| Substantive task-quality improvement | [quality improvement](references/quality-improvement.md) | Extract expertise, diagnose failures, compare changes and test transfer |
+| Preparing or running a controlled comparison | [experiment tools](references/experiment-tools.md) | Freeze actor packets, use an optional trusted adapter, compare graded observations |
 | A source or principle is disputed | [source map](references/sources.md) | Primary-source pointers; distinguish specification from judgment |
 
 ## Workflow
@@ -36,6 +39,8 @@ All Markdown links below are relative to this skill's directory. Do not read eve
 Capture purpose, representative request, expected artifact, hard constraints, non-goals, runtime, and observable success conditions. Use the [contract template](assets/contract.template.md) when the task is substantial; a brief inline contract is enough for a small change.
 
 For an existing skill, read the actual SKILL.md plus relevant linked files and code. Inventory the complete bundle and identify unread or unavailable files before making claims about it. Review all contents before executing or redistributing an untrusted bundle. Record original behavior, host metadata, filenames, licenses, and user constraints to preserve.
+
+For substantive improvement, identify the builder model separately from the intended executor and actual host/effort. Diagnose whether the gap is missing expertise, conflicting instructions, discovery, tool/environment failure, or a defective grader before rewriting.
 
 For a new skill, obtain task-specific examples, corrections, schemas, or a worked case. With no domain evidence, produce a labeled draft, not invented expertise.
 
@@ -53,7 +58,7 @@ Before optimizing, set expected outcomes and failure gates. Start with a represe
 
 Use the [skill template](assets/skill.template.md) as a starting point, not a mandatory final outline. Remove scaffolding. Include one concise example when it disambiguates behavior, and verify that every shown output obeys the exact output contract, including rules about surrounding prose. Give an observable fallback for missing inputs or tools. Keep broad reasoning flexible; fix exact sequences only where a wrong sequence is harmful.
 
-For rewrites, use the [preservation matrix](assets/preservation.template.md). Do not trade away required behavior merely to shorten the root file. Optional reference modules are not independently auto-discovered subagents.
+For rewrites, use the [preservation matrix](assets/preservation.template.md). Do not trade away required behavior merely to shorten the root file. Distinguish mandatory constraints, scoped preferences, domain facts, replaceable strategies and model-specific workarounds; retire obsolete workarounds only with evidence. A valid outcome may be no change, simplification, splitting, tool implementation or retirement. Optional reference modules are not independently auto-discovered subagents.
 
 ### 4. Verify the current candidate
 
@@ -85,7 +90,7 @@ Default ceiling: **10 revision rounds and 1 major redesign**. These are ceilings
 
 Deliver the complete self-contained target bundle, not SKILL.md alone when it depends on other files. Include a concise report using the [report template](assets/report.template.md) only as far as relevant: changes, preserved requirements, files, executed checks, unexecuted checks, remaining risks, and install/use instructions for the verified host.
 
-Keep run logs, source snapshots, and private user data outside the installed skill directory. Audit mode returns findings without mutating the target. Do not claim that the candidate is empirically better until a valid baseline comparison supports that claim.
+Keep run logs, source snapshots, and private user data outside the installed skill directory. Audit mode returns findings without mutating the target. Do not claim that the candidate is empirically better until a valid baseline comparison supports that claim. Report completion separately from correctness, judgment, usefulness and safety; no fixed step sequence or aggregate score substitutes for the user's outcome.
 
 ## Completion gate
 

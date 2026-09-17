@@ -59,3 +59,7 @@ The default `portable` profile rejects case/normalization collisions, reserved W
 References must be reachable from SKILL.md through ordinary local inline links. Linking a directory or a website does not make every reference reachable. Conditional links count as static reachability, not proof that an agent reads the right branch. For an intentional non-execution document under references, use an exact `--reference-exempt references/name.md` path and record why; prefer test data under evals/fixtures. Exemptions do not suppress missing-link or path-escape errors.
 
 Before broad reuse require structural tests, a target-host installation smoke test, actual implicit selection observations, and at least one generated-child evaluation. Any missing host result keeps the revision a candidate. Do not relabel deterministic tests or a packaging success as a validated baseline improvement.
+
+## Broader transfer and actual execution
+
+Use [experiment tools](experiment-tools.md) for frozen actor packets and an optional trusted host adapter. Extend the child experiment beyond extraction with applicable cases from [quality transfer](../evals/quality-transfer-cases.json). Choose a coherent job and keep unrelated cases out of that target suite. Validate judges using [calibration cases](../evals/grader-calibration-cases.json); protect valid alternative solutions as well as detecting defects. All provided new observations are empty, not empirical proof.

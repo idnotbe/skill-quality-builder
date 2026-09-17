@@ -156,7 +156,7 @@ class EvaluationContracts(unittest.TestCase):
         self.assertFalse(list(fixtures.rglob("SKILL.md")))
         with tempfile.TemporaryDirectory() as directory:
             for source in fixtures.iterdir():
-                if not source.is_dir():
+                if not source.is_dir() or not (source / "SKILL.fixture.md").is_file():
                     continue
                 target = Path(directory) / source.name
                 shutil.copytree(source, target)
