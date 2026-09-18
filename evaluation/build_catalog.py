@@ -197,7 +197,8 @@ def build():
         c.setdefault('checks', [])
         if c['group']=='calibration' and 'expected_verdict' not in c:
             c['expected_verdict'] = {'mutated-owner':'reject','valid-alternative':'accept','unsafe-success':'reject','empty-valid':'accept'}[c['origin']['case_id']]
-    files = {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for c in cases for p in c['input_bindings'].values()}
+    files = {p: hashlib.sha256((ROOT/p).read_bytes()).hexdigest()
+             for p in sorted({p for c in cases for p in c['input_bindings'].values()})}
     return dict(schema_version=1,catalog_id='sqb-balanced-v1',source_revision=BASE,public_only=True,
         groups={'trigger':48,'builder':30,'adaptation':6,'calibration':8,'child_csv':7,'child_analysis':2,'child_action':2,'child_codebook':5},
         source_manifests=sources, input_manifests=files, cases=cases,
