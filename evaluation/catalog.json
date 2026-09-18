@@ -81,8 +81,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -107,8 +107,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -133,8 +133,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -159,8 +159,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -185,8 +185,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -211,8 +211,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -237,8 +237,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -263,8 +263,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -289,8 +289,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -315,8 +315,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -341,8 +341,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -367,8 +367,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -393,8 +393,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -419,8 +419,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -445,8 +445,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -471,8 +471,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -497,8 +497,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -523,8 +523,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -549,8 +549,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -575,8 +575,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -601,8 +601,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -627,8 +627,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -653,8 +653,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -679,8 +679,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -705,8 +705,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -731,8 +731,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -757,8 +757,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -783,8 +783,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -809,8 +809,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -835,8 +835,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -861,8 +861,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -887,8 +887,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "discovery",
@@ -978,8 +978,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "contract_and_workflow"
@@ -1018,8 +1018,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "contract_and_workflow"
@@ -1065,8 +1065,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "contract_and_workflow"
@@ -1104,8 +1104,8 @@
       "difficulty": "boundary",
       "evaluation_role": "regression",
       "input_bindings": {
-        "target/unfamiliar-skill/references/conventions.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/references/conventions.md",
-        "target/unfamiliar-skill/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/SKILL.fixture.md"
+        "target/unfamiliar-skill/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/SKILL.fixture.md",
+        "target/unfamiliar-skill/references/conventions.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/references/conventions.md"
       },
       "inline_inputs": {},
       "area": "contract_and_workflow"
@@ -1151,8 +1151,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "contract_and_workflow"
@@ -1191,8 +1191,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "contract_and_workflow"
@@ -1359,8 +1359,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "contract_and_workflow"
@@ -1441,8 +1441,8 @@
       "difficulty": "standard",
       "evaluation_role": "regression",
       "input_bindings": {
-        "target/unfamiliar-skill/references/conventions.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/references/conventions.md",
-        "target/unfamiliar-skill/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/SKILL.fixture.md"
+        "target/unfamiliar-skill/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/SKILL.fixture.md",
+        "target/unfamiliar-skill/references/conventions.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/references/conventions.md"
       },
       "inline_inputs": {},
       "area": "contract_and_workflow"
@@ -1481,8 +1481,8 @@
       "evaluation_role": "regression",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "area": "contract_and_workflow"
@@ -2294,8 +2294,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2319,8 +2319,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2344,8 +2344,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2369,8 +2369,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2394,8 +2394,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2419,8 +2419,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2444,8 +2444,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2469,8 +2469,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2494,8 +2494,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2519,8 +2519,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2544,8 +2544,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2569,8 +2569,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2594,8 +2594,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2619,8 +2619,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2644,8 +2644,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2669,8 +2669,8 @@
       "area": "discovery",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2722,8 +2722,8 @@
       "area": "proportionality",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2894,8 +2894,8 @@
       "area": "interaction",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -2982,8 +2982,8 @@
       "area": "portability",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -3014,8 +3014,8 @@
       "area": "portability",
       "input_bindings": {
         "target/action-csv/LICENSE.txt": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/LICENSE.txt",
-        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md",
-        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md"
+        "target/action-csv/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/SKILL.fixture.md",
+        "target/action-csv/references/edge-cases.md": ".agents/skills/skill-quality-builder/evals/fixtures/action-csv/references/edge-cases.md"
       },
       "inline_inputs": {},
       "origin": {
@@ -3131,8 +3131,8 @@
       "family": "builder/injection-obfuscated",
       "area": "safety",
       "input_bindings": {
-        "target/unfamiliar-skill/references/conventions.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/references/conventions.md",
-        "target/unfamiliar-skill/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/SKILL.fixture.md"
+        "target/unfamiliar-skill/SKILL.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/SKILL.fixture.md",
+        "target/unfamiliar-skill/references/conventions.md": ".agents/skills/skill-quality-builder/evals/fixtures/unfamiliar-skill/references/conventions.md"
       },
       "inline_inputs": {},
       "origin": {

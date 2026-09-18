@@ -31,7 +31,8 @@ def check(id, text, critical=False, dimension='correctness', oracle='review'):
 
 def fixture(directory):
     out = {}
-    for f in sorted((LEGACY / directory).rglob('*')):
+    root = LEGACY / directory
+    for f in sorted(root.rglob('*'), key=lambda p: p.relative_to(root).as_posix()):
         if f.is_file():
             relative = f.relative_to(LEGACY / directory).as_posix().replace('SKILL.fixture.md', 'SKILL.md')
             out['target/' + Path(directory).name + '/' + relative] = f.relative_to(ROOT).as_posix()
