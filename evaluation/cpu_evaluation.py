@@ -187,11 +187,12 @@ def main():
     proc=None;log=None;records=[]
     try:
         proc,log,info=bootstrap(out)
-        base_bind={'schema_version':1,'environment':{'model':MODEL_REPO+' Q8_0 @'+info['model_revision'],
+        model_id=MODEL_REPO+' Q8_0 @'+info['model_revision']
+        base_bind={'schema_version':1,'environment':{'model':model_id,
             'host':HOST+' '+info['runtime_tag'],'tools':'read_file/write_file/optional activate_skill',
             'permissions':'model can read only actor packet; write only packet/output; no shell/network',
             'budget':f'{TURNS} turns x {LIMIT} max output tokens'},
-          'execution_context':{'executor_model':MODEL_REPO,'host_version':HOST+' '+info['runtime_tag'],
+          'execution_context':{'executor_model':model_id,'host_version':HOST+' '+info['runtime_tag'],
             'effort':'greedy CPU','thinking_mode':'enable_thinking=false requested',
             'output_budget':f'{TURNS} x {LIMIT}', 'instruction_stack_sha256':H.canonical_digest(SYSTEM),
             'profile_sha256':H.canonical_digest({'tools':TOOLS,'activate':ACTIVATE})}}
