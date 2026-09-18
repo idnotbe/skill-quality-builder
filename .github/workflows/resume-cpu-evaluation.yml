@@ -1,0 +1,52 @@
+name: Evidence-driven CPU evaluation resume
+on:
+  push:
+    branches: ['eval/independent-cpu-20260918']
+    paths: ['evaluation/resume_cpu_evaluation.py', '.github/workflows/resume-cpu-evaluation.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  independent-group:
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [codebook-frozen, csv-baseline, csv-candidate, builder-pair]
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.13'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: continued-child_codebook
+          run-id: 35297425721
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/source-evidence
+      - name: Affected deterministic checks
+        run: |
+          python -B -m unittest discover -s tests -p 'test_cpu_evaluation.py' -v
+          python -B -m unittest discover -s tests -p 'test_balanced_evaluation.py' -v
+      - name: Execute bounded independent group
+        run: python -B evaluation/resume_cpu_evaluation.py '${{ matrix.group }}' "$RUNNER_TEMP/source-evidence" "$RUNNER_TEMP/resumed"
+      - name: Preserve exact source and evidence
+        if: always()
+        run: |
+          mkdir -p "$RUNNER_TEMP/resumed"
+          git archive --format=tar.gz --output="$RUNNER_TEMP/resumed/source.tar.gz" HEAD
+          git status --porcelain > "$RUNNER_TEMP/resumed/repository-status.txt"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: resumed-${{ matrix.group }}
+          path: ${{ runner.temp }}/resumed/
+          include-hidden-files: true
+          retention-days: 14

@@ -31,7 +31,9 @@ class HostMechanics(unittest.TestCase):
             old=Path.cwd();os.chdir(root);stdout=io.StringIO();sent=[]
             def fake_get(url,payload,timeout):
                 sent.append(json.loads(json.dumps(payload)))
-                return responses.pop(0)
+                value=responses.pop(0)
+                if isinstance(value,Exception): raise value
+                return value
             try:
                 with patch.object(M,'get',fake_get),patch('sys.stdin',io.StringIO(json.dumps(req))),contextlib.redirect_stdout(stdout):M.adapter()
             finally:os.chdir(old)
@@ -68,6 +70,27 @@ class HostMechanics(unittest.TestCase):
         r,_=self.actor([response(content='partial',finish='length')])
         self.assertFalse(r['trace_complete'])
         self.assertEqual(r['actor_status'],'generation_or_turn_limit')
+    def test_truncated_tool_batch_is_not_executed_or_replayed(self):
+        broken={'id':'partial','type':'function','function':{'name':'read_file','arguments':'{"path":"unfinished'}}
+        r,s=self.actor([response([call('write_file',path='output/should-not-exist',content='NO'),broken],finish='length')])
+        self.assertEqual(len(s),1)
+        self.assertEqual(r['actor_status'],'generation_or_turn_limit')
+        self.assertEqual(r['initial_files'],r['final_files'])
+        self.assertTrue(r['model_response_observed'])
+        self.assertFalse(r['trace_complete'])
+        self.assertEqual(r['raw_calls'][0]['response']['choices'][0]['message']['tool_calls'][1],broken)
+    def test_inference_error_retains_earlier_model_and_action_evidence(self):
+        r,s=self.actor([response([call('read_file',path='inputs/source.txt')]),OSError('server unavailable')])
+        self.assertEqual(r['actor_status'],'infrastructure_failure')
+        self.assertTrue(r['model_response_observed'])
+        self.assertEqual(len(r['raw_calls']),1)
+        self.assertEqual(r['events'][0]['result'],'SOURCE_ONLY')
+        self.assertFalse(r['trace_complete'])
+    def test_failure_before_first_response_is_not_a_model_trial(self):
+        r,_=self.actor([OSError('unreachable')])
+        self.assertFalse(r['model_response_observed'])
+        self.assertEqual(r['actor_status'],'infrastructure_failure')
+        self.assertEqual(r['raw_calls'],[])
     def test_contexts_do_not_share_prior_messages(self):
         self.actor([response(content='UNIQUE_OLD_OUTPUT')])
         _,sent=self.actor([response(content='NEW')])
@@ -102,5 +125,18 @@ class PacketPrivacy(unittest.TestCase):
                 self.assertIn(record,req['prompt'])
                 self.assertEqual(paths.setdefault(row['case_id'],record),record)
             self.assertEqual(len(set(paths.values())),5)
+            bindings['conditions']={'candidate':bindings['conditions']['candidate']}
+            bindings['child_build_records']={'candidate':info}
+            M.save(base/'single.json',bindings)
+            H.prepare_group('child_codebook',base/'single.json',base/'single',1)
+            single=json.loads((base/'single/judge/index.json').read_text())['runs']
+            self.assertEqual(len(single),5)
+            self.assertEqual({r['condition'] for r in single},{'candidate'})
+            suite=json.loads((base/'single/judge/suite.json').read_text())
+            observations=json.loads((base/'single/judge/observations.json').read_text())
+            from summarize_evals import summarize
+            result=summarize(suite,observations)
+            self.assertEqual(result['conditions']['candidate']['status'],'unverified')
+
 
 if __name__=='__main__':unittest.main(verbosity=2)

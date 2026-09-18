@@ -118,7 +118,7 @@ def adapter():
             description=next((x for x in text.splitlines() if x.startswith('description:')),'')
             system+='\nOptional installed skill: '+skill.name+'\n'+description
     messages=[{'role':'system','content':system},{'role':'user','content':request['prompt']}]
-    events=[]; raw=[]; output=''; complete=False; model_completed=False
+    events=[]; raw=[]; output=''; complete=False; model_completed=False; inference_error=None
     tools=TOOLS+([ACTIVATE] if skill and not active else [])
     before={p.relative_to(root).as_posix():('directory' if p.is_dir() else sha(p)) for p in root.rglob('*')}
     if active: events.append({'source':'host','type':'forced_skill_load','skill':skill.name})
@@ -126,13 +126,27 @@ def adapter():
         payload={'model':'local-eval','messages':messages,'tools':tools,'tool_choice':'auto',
           'temperature':0,'seed':184108,'max_tokens':LIMIT,'stream':False,'cache_prompt':False,
           'chat_template_kwargs':{'enable_thinking':False}}
-        t=time.monotonic(); response=get('http://127.0.0.1:8099/v1/chat/completions',payload,timeout=300)
+        t=time.monotonic()
+        try:
+            response=get('http://127.0.0.1:8099/v1/chat/completions',payload,timeout=300)
+        except Exception as exc:
+            # Preserve earlier real responses/actions instead of losing them to
+            # an adapter crash. Infrastructure failure is never a model verdict.
+            inference_error={'type':type(exc).__name__,'message':str(exc)}
+            events.append({'source':'host','type':'inference_error',**inference_error})
+            break
         raw.append({'request':json.loads(json.dumps(payload)),'response':response,'duration_seconds':time.monotonic()-t})
         message=response['choices'][0]['message']; finish=response['choices'][0].get('finish_reason')
         model_completed=True
         messages.append(message)
         output=message.get('content') or ''
         calls=message.get('tool_calls') or []
+        if finish=='length':
+            # llama.cpp can emit a partial tool argument at the token limit.
+            # Do not execute a partial batch or replay it as valid JSON, which
+            # would turn an observed generation limit into HTTP 500 next turn.
+            events.append({'source':'host','type':'generation_limit','tool_batch_executed':False})
+            break
         if not calls:
             complete=finish=='stop';break
         for call in calls:
@@ -165,7 +179,8 @@ def adapter():
     after={p.relative_to(root).as_posix():('directory' if p.is_dir() else sha(p)) for p in root.rglob('*')}
     print(json.dumps({'output':output,'events':events,'trace_complete':complete,
         'trace_source':'host_event_stream','model_response_observed':model_completed,
-        'actor_status':'completed' if complete else 'generation_or_turn_limit',
+        'actor_status':'infrastructure_failure' if inference_error else 'completed' if complete else 'generation_or_turn_limit',
+        'inference_error':inference_error,
         'raw_calls':raw,'initial_files':before,'final_files':after},ensure_ascii=False))
 
 
