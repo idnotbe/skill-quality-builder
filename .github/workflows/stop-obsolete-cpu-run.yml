@@ -1,0 +1,16 @@
+name: Stop superseded automatic CPU run
+on:
+  push:
+    branches: ['eval/independent-cpu-20260918']
+    paths: ['.github/workflows/stop-obsolete-cpu-run.yml']
+permissions:
+  actions: write
+jobs:
+  stop-obsolete:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Cancel only the obsolete initial-plan run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST repos/idnotbe/skill-quality-builder/actions/runs/35300006737/cancel
