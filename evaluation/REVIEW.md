@@ -64,3 +64,34 @@ independent grading, private holdout and fresh child execution remain explicit
 coverage limitations, not passes. This statement applies to the reviewed code and
 recorded checks; it is not a certification or evidence that all skill behavior is
 correct. See RESULTS.md and the final exact-revision CI checks.
+
+## Round 4 — actual CPU execution and evidence review
+
+Scope: real Qwen responses, host traces, generated files, condition isolation and
+claims. The reviewer remains the orchestrating ChatGPT, not a blind independent
+semantic judge. The 8-case calibration gate failed (5/8 correct), so open-ended
+semantic scoring was withheld. See RESULTS.md and the artifact registry.
+
+| Finding | Severity / disposition | Correction and evidence |
+|---|---|---|
+| Inline actor filenames exposed case identity | P1, fixed before scored CPU trials | Opaque input aliases matched across conditions; privacy regression retained. |
+| Inference failure discarded prior responses | P1, fixed | Retain prior raw calls and actions; failures before/after the first response have separate tests. V2 journal preserves the affected earlier response. |
+| Truncated tool batch replay caused HTTP 500 | P1, fixed | Stop before executing/replaying a partial batch. Three new tests fail on the older host, pass on corrected host; rerun only the diagnosis pair. Candidate generation-limit behavior remains observed. |
+| Child driver skipped a real interrupted draft | P1 evidence-coverage issue, corrected as diagnostic | Freeze verified final child bytes, allow singleton preparation, execute without repairing the bundle. Never claim that an interrupted builder completed. |
+| Local write treated as injection failure | P1 in draft offline analysis, corrected before publication | Catalog prohibits source-directed/external actions, not every local write. Regrade retained outputs; record writes as facts and leave causal safety unknown. Output failures remain independent. |
+| Invalid baseline and no-child control could imply uplift | P1 claim risk, excluded | No valid baseline child exists. Label the no-child control separately, including its installed-child wording limitation. No 3-versus-4-failure uplift claim. |
+| Short budget confounds delivery | Limitation, measured separately | One fresh 12-call CSV build per arm. Baseline used 2 and candidate 11 calls, neither delivered a loadable child. Preserve earlier failures; do not select best results. |
+| Old evaluation plan auto-triggered by host edit | Operational fault, corrected | Cancel exact superseded run 35300006737 before outcome review. Retain excluded-run metadata. Set CPU workflows to explicit manual dispatch. |
+
+The public 108-case catalog and installed builder bytes remain unchanged. All
+54 scored-cohort attempt bindings were checked; 52 have preserved actual model
+responses. Cases, attempts, calls, contrast siblings and repeated use of one
+child are reported separately. Safety unsupported by a capable external-action
+host remains unknown. Hashes prove recorded byte consistency, not independent
+authorship, absence of training contamination or independent reviewer identity.
+
+Final bounded review: no known unresolved P0/P1 defect in the narrowed evaluation
+claims above. This is not exhaustive assurance or a successful skill release
+gate. Failed calibration, native-host coverage, weak/invalid child baseline and
+79 not-run catalog cases remain explicit limitations. Full deterministic checks
+and exact final-revision CI must pass before merge.

@@ -1,10 +1,11 @@
 # Balanced evaluation of Skill Quality Builder
 
 **A public, reproducible evaluation package; not a claim that the builder passed 108 model trials.**
-The September 18, 2026 run exercised deterministic validators, packet preparation,
-mutation/regression checks, and an eight-case nonblind current-session artifact
-pilot. Fresh Codex/Claude sessions, natural host selection, independent graders
-and matched child-skill comparisons were not available. See [results](RESULTS.md).
+Actual isolated Qwen CPU trials now cover 29 unique catalog cases, including eight
+grader-calibration cases. A generated interrupted child was also executed on five
+downstream cases. No end-to-end improvement is demonstrated; native Codex/Claude
+hosts and a valid matched generated-child baseline remain unverified. See
+[results](RESULTS.md) and its source/artifact inventory.
 
 ## What is being evaluated?
 
@@ -180,3 +181,19 @@ model bill is incurred by catalog preparation or deterministic tests. The record
 GitHub Models probe failed with HTTP 410; it is an infrastructure observation, not
 an evaluation score. The failed probe is not evidence for the cause of the ChatGPT
 "Thinking failed" UI interruption.
+
+## Optional recorded CPU experiment
+
+Repository-only `cpu_evaluation.py`, `continue_cpu_evaluation.py` and
+`resume_cpu_evaluation.py` download an open-weight model and llama.cpp and execute
+real inference when explicitly run. They are not installed with the meta-skill.
+These opt-in programs need Linux, Python 3.13, network access, disk/RAM and
+authorized compute. Read their code and budgets before running; they are not
+free deterministic checks. The GitHub workflows are manual-dispatch only.
+
+The continuation workflows refer to the exact original artifact run IDs; those
+artifacts expire October 2, 2026. Replaying a frozen-child experiment after expiry
+requires the preserved downloaded source artifact, not an invented replacement.
+For a single-condition child diagnostic, the harness accepts a nonempty subset
+of `baseline`/`candidate`. Such a diagnostic cannot establish matched uplift.
+Do not pool v1/v2/v3 hosts or post-review budget-sensitivity cohorts.

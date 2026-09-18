@@ -4,7 +4,7 @@ Create, improve, and audit reusable Agent Skills with built-in validation, packa
 
 ## Validation status
 
-**Candidate toolkit, not a certified autonomous quality gate.** Python tests cover deterministic helpers and regression cases. They do not establish host selection, generated-skill task quality, or a baseline improvement. Shipped host observation files are deliberately empty and return `unverified`. No model runner is included.
+**Candidate toolkit, not a certified autonomous quality gate.** Python tests cover deterministic helpers and regression cases. They do not establish host selection, generated-skill task quality, or a baseline improvement. Shipped host observation files are deliberately empty and return `unverified`. No model runtime is bundled with the installed skill; optional repository-only CPU evaluation drivers download and run a model when explicitly executed.
 
 The static CI workflow covers Linux/Windows and Python 3.10/3.13, including portable package/extract round trips. A workflow definition is not a successful run: inspect the checks for the exact revision before reuse. Installation commands below are recipes; they have not been established as end-to-end host evaluation evidence by this repository.
 
@@ -35,8 +35,11 @@ checks and adversarial regression tests. It is deliberately outside the installe
 skill bundle.
 
 [Recorded results](evaluation/RESULTS.md) distinguish deterministic checks and an
-eight-case nonblind current-session artifact pilot from the still-unverified fresh
-host/child comparisons. No 108-case model pass rate or improvement is claimed.
+eight-case nonblind current-session artifact pilot from actual isolated Qwen CPU
+trials on 29 catalog cases (including eight grader-calibration cases). A frozen
+generated child was tested on five downstream cases; no end-to-end improvement
+is demonstrated. Native-host performance and a valid matched child baseline
+remain unverified. No 108-case model pass rate is claimed.
 
 ## Convenient installation (floating versions)
 

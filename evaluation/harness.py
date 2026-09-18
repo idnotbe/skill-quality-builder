@@ -13,6 +13,7 @@ import hashlib
 import io
 import json
 import re
+import secrets
 import shutil
 import sys
 import tempfile
@@ -124,7 +125,12 @@ def prepare_group(group, bindings_path, output, repetitions=3):
     role='child' if group.startswith('child_') else 'grader' if group=='calibration' else 'builder'
     require(bindings.get('evaluation_target')==role, 'Bindings must identify evaluation_target='+role+'; do not test a child task with the builder itself.')
     conditions=bindings.get('conditions',{})
-    require(set(conditions)==({'candidate'} if group in ('trigger','calibration') else {'baseline','candidate'}), 'Incorrect conditions for this group.')
+    if role=='child':
+        # A missing/invalid opposing build must not block a real generated child.
+        # A singleton cohort is diagnostic, never a matched uplift estimate.
+        require(bool(conditions) and set(conditions)<={'baseline','candidate'}, 'Incorrect conditions for this group.')
+    else:
+        require(set(conditions)==({'candidate'} if group in ('trigger','calibration') else {'baseline','candidate'}), 'Incorrect conditions for this group.')
     if role=='child':
         require(isinstance(bindings.get('child_build_records'),dict), 'Supply child-build provenance, not just a generated SKILL.md.')
         for name, info in conditions.items():
@@ -144,11 +150,11 @@ def prepare_group(group, bindings_path, output, repetitions=3):
         stage=Path(name); native=[]; fixture_hashes={}; view_records={}
         for c0 in data['cases']:
             if c0['group']!=group: continue
-            c=copy.deepcopy(c0); inputs={}
+            c=copy.deepcopy(c0); inputs={}; namespace=secrets.token_hex(12)
             for dest,src in c.pop('input_bindings').items(): inputs[dest]=(ROOT/src).read_bytes()
             for dest,text in c.pop('inline_inputs').items():
-                # Per-case paths avoid collisions across records with the same filename.
-                unique='inputs/'+c['id'].replace('/','-')+'/'+Path(dest).name
+                # Opaque per-case paths prevent both collisions and answer-bearing ID leakage.
+                unique='inputs/'+namespace+'/'+Path(dest).name
                 c['prompt']=c['prompt'].replace(dest,unique)
                 inputs[unique]=text.encode('utf-8')
             c['input_files']=list(inputs)
