@@ -1,8 +1,5 @@
 name: Targeted independent CPU evaluation continuation
 on:
-  push:
-    branches: ['eval/independent-cpu-20260918']
-    paths: ['evaluation/continue_cpu_evaluation.py', '.github/workflows/continue-cpu-evaluation.yml']
   workflow_dispatch:
 permissions:
   contents: read

@@ -1,8 +1,5 @@
 name: Opt-in independent CPU model evaluation
 on:
-  push:
-    branches: ['eval/independent-cpu-20260918']
-    paths: ['evaluation/cpu_evaluation.py', '.github/workflows/independent-cpu-evaluation.yml']
   workflow_dispatch:
 permissions:
   contents: read
