@@ -55,7 +55,7 @@ def download(url, path):
 
 def bootstrap(out):
     runtime=out/'runtime'; runtime.mkdir()
-    release=get('https://api.github.com/repos/ggml-org/llama.cpp/releases/latest')
+    release=get('https://api.github.com/repos/ggml-org/llama.cpp/releases/tags/b10964')
     assets=[x for x in release['assets'] if x['name'].endswith('-bin-ubuntu-x64.tar.gz')]
     if len(assets)!=1: raise RuntimeError('Cannot uniquely identify official CPU runtime asset')
     asset=assets[0]; archive=runtime/'runtime.tar.gz'; digest=download(asset['browser_download_url'],archive)
