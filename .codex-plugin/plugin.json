@@ -1,0 +1,11 @@
+{
+  "name": "skill-quality-builder",
+  "version": "1.0.0",
+  "description": "Create, improve, and audit reusable Agent Skills with explicit validation and evaluation.",
+  "author": {
+    "name": "idnotbe"
+  },
+  "homepage": "https://github.com/idnotbe/skill-quality-builder",
+  "repository": "https://github.com/idnotbe/skill-quality-builder",
+  "skills": "./.agents/skills/"
+}

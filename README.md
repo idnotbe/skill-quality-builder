@@ -2,11 +2,13 @@
 
 Create, improve, and audit reusable Agent Skills with built-in validation, packaging, evaluation templates, and adversarial review guidance.
 
+**Distribution:** standalone skill and skills-only plugin for Claude and ChatGPT/Codex, using one canonical bundle. See [installation and distribution](INSTALL.md) for both marketplaces, Windows/Linux, updates and verification boundaries.
+
 ## Validation status
 
 **Candidate toolkit, not a certified autonomous quality gate.** Python tests cover deterministic helpers and regression cases. They do not establish host selection, generated-skill task quality, or a baseline improvement. Shipped host observation files are deliberately empty and return `unverified`. No model runtime is bundled with the installed skill; optional repository-only CPU evaluation drivers download and run a model when explicitly executed.
 
-The static CI workflow covers Linux/Windows and Python 3.10/3.13, including portable package/extract round trips. A workflow definition is not a successful run: inspect the checks for the exact revision before reuse. Installation commands below are recipes; they have not been established as end-to-end host evaluation evidence by this repository.
+The static CI workflow covers Linux/Windows and Python 3.10/3.13, including portable package/extract round trips. A workflow definition is not a successful run: inspect the checks for the exact revision before reuse. The separate distribution workflow tests actual installer compatibility; it does not establish end-to-end model behavior or skill effectiveness.
 
 ## Improve actual task quality
 
@@ -43,7 +45,7 @@ remain unverified. No 108-case model pass rate is claimed.
 
 ## Convenient installation (floating versions)
 
-Requires Node.js 22.20 or later; `npx` is included with npm. Run in the project where you want to use the skill:
+Use a supported Node.js LTS release (distribution CI uses Node.js 24); `npx` is included with npm. Run in the project where you want to use the skill:
 
 ```bash
 npx skills@latest add idnotbe/skill-quality-builder
@@ -51,10 +53,10 @@ npx skills@latest add idnotbe/skill-quality-builder
 
 The installer discovers `.agents/skills/skill-quality-builder/SKILL.md` and prompts for supported agents and installation scope. This convenient command floats both the installer and source revision; do not use it to reproduce a previously reviewed version.
 
-For an explicitly selected global Codex installation:
+For an explicitly selected global Codex and Claude Code installation:
 
 ```bash
-npx skills@latest add idnotbe/skill-quality-builder --skill skill-quality-builder --agent codex --global --copy --yes
+npx skills@latest add idnotbe/skill-quality-builder --skill skill-quality-builder --agent codex claude-code --global --copy --yes
 ```
 
 Review the destination and existing local edits before a non-interactive installation. Listing the skill confirms an installer record, not that the host can load it correctly.
@@ -118,6 +120,7 @@ From the full repository checkout with Python 3.10 or newer:
 
 ```bash
 python -B -m unittest discover -s tests -v
+python -B tools/distribution.py
 python -B .agents/skills/skill-quality-builder/scripts/lint_skill.py .agents/skills/skill-quality-builder --format json
 python -B .agents/skills/skill-quality-builder/scripts/summarize_evals.py .agents/skills/skill-quality-builder/evals/trigger-suite.json .agents/skills/skill-quality-builder/evals/observations.empty.json
 python -B .agents/skills/skill-quality-builder/scripts/summarize_evals.py .agents/skills/skill-quality-builder/evals/behavior-cases.json .agents/skills/skill-quality-builder/evals/behavior-observations.empty.json
