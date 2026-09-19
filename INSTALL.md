@@ -75,9 +75,11 @@ install its quoted absolute path with a pinned `skills` CLI version. `@latest`
 and the short GitHub source command float. Back up local modifications before
 updating; installers may replace existing files. Keep the previous reviewed
 revision for rollback. Do not install project and global copies unintentionally.
-For plugin releases, bump both manifest versions together and update the full
-source SHA in each marketplace after the source commit has passed review and
-merged. Updating a marketplace does not approve unreviewed source changes.
+For plugin releases, bump both manifest versions together. Both marketplace
+catalogs use the existing hub policy of tracking each source repository's default
+branch, rather than pinning a commit. Merge only reviewed, tested releases to
+that branch; record the actual source SHA and installer versions when verifying
+an installation. Marketplace refresh is not a reproducibility guarantee.
 
 ## Verification boundaries
 
